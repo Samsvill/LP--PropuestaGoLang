@@ -76,7 +76,7 @@
 
 
 
-**Introducción**
+# **Introducción**
 
 El lenguaje de programación Go (o también conocido como GoLang) es un lenguaje imperativo multiparadigmático soportado por Google que se lanzó al mercado en el 2009. Es un lenguaje rápido, compilado, y eficiente que consta con su propio garbage collector. Es de rápido aprendizaje y permite gran escalabilidad ya que sus programas se implementan a base de paquetes. No es uno de los lenguajes más reconocidos; sin embargo, se le atribuye una sensación de familiaridad (ya que se puede comparar fácilmente con Python, Java y C).
 
@@ -86,7 +86,7 @@ Para poder construir el lenguaje basado en GoLang se procederá a usar librería
 
 
 
-**Componentes Léxicos**
+# **Componentes Léxicos**
 
 ***Variables.***
 
@@ -179,7 +179,7 @@ Sean “x” y “y”, 10 y 5 respectivamente:
 |\n|Salto de línea|
 |\t|Tabulación (sangría)|
 
-**Reglas Sintácticas** 
+# **Reglas Sintácticas** 
 
 ***Asignación de variables*** 
 
@@ -195,7 +195,7 @@ La última forma que se revisará para crear una variable es conocida como decla
 
 
 
-**Estructuras de Control**
+# **Estructuras de Control**
 
 ***Estructura Condicional If*** 
 
@@ -247,7 +247,7 @@ switch i {
 
 
 
-**Estructuras de datos (definiciones)**
+# **Estructuras de datos**
 
 ***Array*** 
 
@@ -405,7 +405,7 @@ Ejemplos de funciones:
 
 
 
-**Reglas Semánticas** 
+# **Reglas Semánticas** 
 
 ***Conversión entre tipos de datos enteros***
 

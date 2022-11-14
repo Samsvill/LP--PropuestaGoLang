@@ -9,7 +9,8 @@ reserved = {
   'ingresar':'INGRESAR',
   'y':'Y',
   'o':'O',
-  'no':'NO'
+  'no':'NO',
+  'map':'MAP' #Sam
 }
 
 tokens = [
@@ -23,15 +24,24 @@ tokens = [
   'LPAREN',
   'RPAREN',
   'VARIABLE',
+  'STRING',
   'IGUAL',
   'MENORQUE',
   'MAYORQUE',
   'DIFERENTE',
   'COMPARA_IGUAL',
   'PUNTO_COMA',
+  'LCBRACKET',
+  'RCBRACKET',
+  'INCREMENT',
+  'LBRACKET',
+  'RBRACKET',
+  'DQMARK',
+  'COLON',
+  'COMMA'
 ] + list(reserved.values())
 
-# Regular expression rules for simple tokens
+# TOKENS SIMPLES
 t_MAS     = r'\+'
 t_MENOS   = r'-'
 t_PRODUCTO   = r'\*'
@@ -44,14 +54,22 @@ t_MAYORQUE = r'>'
 t_DIFERENTE = r'!='
 t_COMPARA_IGUAL = r'=='
 t_PUNTO_COMA = r';'
+t_LCBRACKET = r'\{'
+t_RCBRACKET = r'\}'
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
+#t_DQMARK = r'"'
+t_COLON = r':'
+t_COMMA = r','
 
-# A regular expression rule with some action code
+# DEFINICION DE TOKENS
 def t_FLOTANTE(t):
   r'\d+\.\d+'
   return t
   
 def t_ENTERO(t):
-  r'\d+' 
+  r'\d+'
+  t.value = int(t.value)
   return t
 
 def t_COMPLEJO(t): #un tipo de dato nuevo
@@ -62,35 +80,53 @@ def t_VARIABLE(t):
   r'[a-zA-Z_][a-zA-Z0-9]*'
   t.type = reserved.get(t.value,'VARIABLE')
   return t
-  
+
+def t_STRING(t):
+  r'".*"'
+  t.type = reserved.get(t.value,'STRING')
+  return t
+
 def t_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
+
+def t_INCREMENT(t):
+  r'\+{2}'
+  return t
+
  
-# A string containing ignored characters (spaces and tabs)
+# IGNORAR
 t_ignore  = ' \t'
 
 def t_COMMENTS(t):
   r'\#.*'
   pass
   
-# Error handling rule
+# ERRORES
 def t_error(t):
   print("Caracter no permitido'%s'" % t.value[0])
   t.lexer.skip(1)
  
- # Build the lexer
+ # LEXER
 lexer = lex.lex()
 
 def getTokens(lexer):
   for tok in lexer:
     print(tok)
 
-'''
-instructions = 'clase Padre 44>334+var;'
-linea=" "
-lexer.input(instructions)
+# PROBAR -------SAM----------------
+Sam_instruc = """
+nameAgeMap = map[string]int{
+  "James": 50,
+  "Ali":   39,
+}
+"""
+lexer.input(Sam_instruc)
 getTokens(lexer)
+# FIN PROBAR -------SAM----------------
+
+# SEGUIR LEYENDO
+linea=" "
 while linea!="":
     linea=input(">>")
     lexer.input(linea)
@@ -98,4 +134,3 @@ while linea!="":
 # Tokenize
 print("Succesfull")
 
-'''

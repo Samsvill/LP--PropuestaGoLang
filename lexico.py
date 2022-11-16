@@ -1,15 +1,21 @@
 import ply.lex as lex
 
 reserved = {
-  'si':'SI',
-  'para':'PARA',
-  'mientras':'MIENTRAS',
-  'clase':'CLASE',
-  'imprimir':'IMPRIMIR',
-  'ingresar':'INGRESAR',
-  'y':'Y',
-  'o':'O',
-  'no':'NO',
+  'if':'IF', #YANA
+  'for':'FOR',
+  'else' : 'ELSE',
+  'else if' : 'ELSE IF',
+  'Print':'PRINT',
+  'Println' : 'PRINTLN',
+  'switch':'SWITCH',
+  'return':'RETURN',
+  'func':'FUNC',#YANA
+  'select':'SELECT',
+  'import' : 'IMPORT',
+  'case' : 'CASE',
+  'break' : 'BREAK',
+  'default' : 'DEFAULT',
+  'struct' : 'STRUCT',
   'map':'MAP' #Sam
 }
 

@@ -1,0 +1,5 @@
+
+Print(34)
+Print("valor")
+for variable := 34 ; variable < 32 ; {
+Print("valor")

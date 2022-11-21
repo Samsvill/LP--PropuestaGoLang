@@ -4,32 +4,22 @@ Unused terminals:
 
     BREAK
     CASE
-    COLON
     COMMA
-    COMPARA_IGUAL
     COMPLEJO
     DEFAULT
-    DIFERENTE
     DIVISION
     DQMARK
     ELSE
-    EQUALS
     FLOTANTE
-    FOR
     FUNC
     IF
     IMPORT
     INCREMENT
     LBRACKET
-    LCBRACKET
     MAP
-    MAS
-    MAYORQUE
-    MENORQUE
     MENOS
     PRINTLN
     PRODUCTO
-    PUNTO_COMA
     RBRACKET
     RCBRACKET
     RETURN
@@ -38,67 +28,74 @@ Unused terminals:
     SWITCH
     TINT
     TSTRING
-    VARIABLE
 
 Grammar
 
 Rule 0     S' -> instrucciones
 Rule 1     instrucciones -> impresion
-Rule 2     impresion -> PRINT LPAREN valor RPAREN
-Rule 3     valor -> INT
-Rule 4     valor -> STRING
+Rule 2     instrucciones -> for
+Rule 3     impresion -> PRINT LPAREN valor RPAREN
+Rule 4     valor -> INT
+Rule 5     valor -> STRING
+Rule 6     sigcomparacion -> MENORQUE
+Rule 7     sigcomparacion -> MAYORQUE
+Rule 8     sigcomparacion -> DIFERENTE
+Rule 9     sigcomparacion -> COMPARA_IGUAL
+Rule 10    for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
 
 Terminals, with rules where they appear
 
 BREAK                : 
 CASE                 : 
-COLON                : 
+COLON                : 10
 COMMA                : 
-COMPARA_IGUAL        : 
+COMPARA_IGUAL        : 9
 COMPLEJO             : 
 DEFAULT              : 
-DIFERENTE            : 
+DIFERENTE            : 8
 DIVISION             : 
 DQMARK               : 
 ELSE                 : 
-EQUALS               : 
+EQUALS               : 10
 FLOTANTE             : 
-FOR                  : 
+FOR                  : 10
 FUNC                 : 
 IF                   : 
 IMPORT               : 
 INCREMENT            : 
-INT                  : 3
+INT                  : 4 10 10
 LBRACKET             : 
-LCBRACKET            : 
-LPAREN               : 2
+LCBRACKET            : 10
+LPAREN               : 3
 MAP                  : 
-MAS                  : 
-MAYORQUE             : 
-MENORQUE             : 
+MAS                  : 10 10
+MAYORQUE             : 7
+MENORQUE             : 6
 MENOS                : 
-PRINT                : 2
+PRINT                : 3
 PRINTLN              : 
 PRODUCTO             : 
-PUNTO_COMA           : 
+PUNTO_COMA           : 10 10
 RBRACKET             : 
 RCBRACKET            : 
 RETURN               : 
-RPAREN               : 2
+RPAREN               : 3
 SELECT               : 
-STRING               : 4
+STRING               : 5
 STRUCT               : 
 SWITCH               : 
 TINT                 : 
 TSTRING              : 
-VARIABLE             : 
+VARIABLE             : 10 10
 error                : 
 
 Nonterminals, with rules where they appear
 
+for                  : 2
 impresion            : 1
 instrucciones        : 0
-valor                : 2
+sigcomparacion       : 10
+valor                : 3
 
 Parsing method: LALR
 
@@ -106,12 +103,16 @@ state 0
 
     (0) S' -> . instrucciones
     (1) instrucciones -> . impresion
-    (2) impresion -> . PRINT LPAREN valor RPAREN
+    (2) instrucciones -> . for
+    (3) impresion -> . PRINT LPAREN valor RPAREN
+    (10) for -> . FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
 
-    PRINT           shift and go to state 3
+    PRINT           shift and go to state 4
+    FOR             shift and go to state 5
 
     instrucciones                  shift and go to state 1
     impresion                      shift and go to state 2
+    for                            shift and go to state 3
 
 state 1
 
@@ -128,46 +129,180 @@ state 2
 
 state 3
 
-    (2) impresion -> PRINT . LPAREN valor RPAREN
+    (2) instrucciones -> for .
 
-    LPAREN          shift and go to state 4
+    $end            reduce using rule 2 (instrucciones -> for .)
 
 
 state 4
 
-    (2) impresion -> PRINT LPAREN . valor RPAREN
-    (3) valor -> . INT
-    (4) valor -> . STRING
+    (3) impresion -> PRINT . LPAREN valor RPAREN
 
-    INT             shift and go to state 6
-    STRING          shift and go to state 7
+    LPAREN          shift and go to state 6
 
-    valor                          shift and go to state 5
 
 state 5
 
-    (2) impresion -> PRINT LPAREN valor . RPAREN
+    (10) for -> FOR . VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
 
-    RPAREN          shift and go to state 8
+    VARIABLE        shift and go to state 7
 
 
 state 6
 
-    (3) valor -> INT .
+    (3) impresion -> PRINT LPAREN . valor RPAREN
+    (4) valor -> . INT
+    (5) valor -> . STRING
 
-    RPAREN          reduce using rule 3 (valor -> INT .)
+    INT             shift and go to state 9
+    STRING          shift and go to state 10
 
+    valor                          shift and go to state 8
 
 state 7
 
-    (4) valor -> STRING .
+    (10) for -> FOR VARIABLE . COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
 
-    RPAREN          reduce using rule 4 (valor -> STRING .)
+    COLON           shift and go to state 11
 
 
 state 8
 
-    (2) impresion -> PRINT LPAREN valor RPAREN .
+    (3) impresion -> PRINT LPAREN valor . RPAREN
 
-    $end            reduce using rule 2 (impresion -> PRINT LPAREN valor RPAREN .)
+    RPAREN          shift and go to state 12
+
+
+state 9
+
+    (4) valor -> INT .
+
+    RPAREN          reduce using rule 4 (valor -> INT .)
+
+
+state 10
+
+    (5) valor -> STRING .
+
+    RPAREN          reduce using rule 5 (valor -> STRING .)
+
+
+state 11
+
+    (10) for -> FOR VARIABLE COLON . EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
+
+    EQUALS          shift and go to state 13
+
+
+state 12
+
+    (3) impresion -> PRINT LPAREN valor RPAREN .
+
+    $end            reduce using rule 3 (impresion -> PRINT LPAREN valor RPAREN .)
+
+
+state 13
+
+    (10) for -> FOR VARIABLE COLON EQUALS . INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
+
+    INT             shift and go to state 14
+
+
+state 14
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT . PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
+
+    PUNTO_COMA      shift and go to state 15
+
+
+state 15
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA . VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
+
+    VARIABLE        shift and go to state 16
+
+
+state 16
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE . sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
+    (6) sigcomparacion -> . MENORQUE
+    (7) sigcomparacion -> . MAYORQUE
+    (8) sigcomparacion -> . DIFERENTE
+    (9) sigcomparacion -> . COMPARA_IGUAL
+
+    MENORQUE        shift and go to state 18
+    MAYORQUE        shift and go to state 19
+    DIFERENTE       shift and go to state 20
+    COMPARA_IGUAL   shift and go to state 21
+
+    sigcomparacion                 shift and go to state 17
+
+state 17
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion . INT PUNTO_COMA MAS MAS LCBRACKET
+
+    INT             shift and go to state 22
+
+
+state 18
+
+    (6) sigcomparacion -> MENORQUE .
+
+    INT             reduce using rule 6 (sigcomparacion -> MENORQUE .)
+
+
+state 19
+
+    (7) sigcomparacion -> MAYORQUE .
+
+    INT             reduce using rule 7 (sigcomparacion -> MAYORQUE .)
+
+
+state 20
+
+    (8) sigcomparacion -> DIFERENTE .
+
+    INT             reduce using rule 8 (sigcomparacion -> DIFERENTE .)
+
+
+state 21
+
+    (9) sigcomparacion -> COMPARA_IGUAL .
+
+    INT             reduce using rule 9 (sigcomparacion -> COMPARA_IGUAL .)
+
+
+state 22
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT . PUNTO_COMA MAS MAS LCBRACKET
+
+    PUNTO_COMA      shift and go to state 23
+
+
+state 23
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA . MAS MAS LCBRACKET
+
+    MAS             shift and go to state 24
+
+
+state 24
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS . MAS LCBRACKET
+
+    MAS             shift and go to state 25
+
+
+state 25
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS . LCBRACKET
+
+    LCBRACKET       shift and go to state 26
+
+
+state 26
+
+    (10) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET .
+
+    $end            reduce using rule 10 (for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET .)
 

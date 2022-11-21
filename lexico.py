@@ -6,6 +6,7 @@ reserved = {
   'else' : 'ELSE',
   'Print':'PRINT',
   'Println' : 'PRINTLN',
+
   'switch':'SWITCH',
   'return':'RETURN',
   'func':'FUNC',#YANALEENPLUAS}

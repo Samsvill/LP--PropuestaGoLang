@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BREAK CASE COLON COMMA COMPARA_IGUAL COMPLEJO DEFAULT DIFERENTE DIVISION DQMARK ELSE EQUALS FLOTANTE FOR FUNC IF IMPORT INCREMENT INT LBRACKET LCBRACKET LPAREN MAP MAS MAYORQUE MENORQUE MENOS PRINT PRINTLN PRODUCTO PUNTO_COMA RBRACKET RCBRACKET RETURN RPAREN SELECT STRING STRUCT SWITCH TINT TSTRING VARIABLEinstrucciones : impresionimpresion : PRINT LPAREN valor RPARENvalor : INT\n          | STRING\n          '
+_lr_signature = 'BREAK CASE COLON COMMA COMPARA_IGUAL COMPLEJO DEFAULT DIFERENTE DIVISION DQMARK ELSE EQUALS FLOTANTE FOR FUNC IF IMPORT INCREMENT INT LBRACKET LCBRACKET LPAREN MAP MAS MAYORQUE MENORQUE MENOS PRINT PRINTLN PRODUCTO PUNTO_COMA RBRACKET RCBRACKET RETURN RPAREN SELECT STRING STRUCT SWITCH TINT TSTRING VARIABLEinstrucciones : impresion\n                      | forimpresion : PRINT LPAREN valor RPARENvalor : INT\n          | STRING\n          sigcomparacion : MENORQUE\n                     | MAYORQUE\n                     | DIFERENTE\n                     | COMPARA_IGUALfor : FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA MAS MAS LCBRACKET '
     
-_lr_action_items = {'PRINT':([0,],[3,]),'$end':([1,2,8,],[0,-1,-2,]),'LPAREN':([3,],[4,]),'INT':([4,],[6,]),'STRING':([4,],[7,]),'RPAREN':([5,6,7,],[8,-3,-4,]),}
+_lr_action_items = {'PRINT':([0,],[4,]),'FOR':([0,],[5,]),'$end':([1,2,3,12,26,],[0,-1,-2,-3,-10,]),'LPAREN':([4,],[6,]),'VARIABLE':([5,15,],[7,16,]),'INT':([6,13,17,18,19,20,21,],[9,14,22,-6,-7,-8,-9,]),'STRING':([6,],[10,]),'COLON':([7,],[11,]),'RPAREN':([8,9,10,],[12,-4,-5,]),'EQUALS':([11,],[13,]),'PUNTO_COMA':([14,22,],[15,23,]),'MENORQUE':([16,],[18,]),'MAYORQUE':([16,],[19,]),'DIFERENTE':([16,],[20,]),'COMPARA_IGUAL':([16,],[21,]),'MAS':([23,24,],[24,25,]),'LCBRACKET':([25,],[26,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'instrucciones':([0,],[1,]),'impresion':([0,],[2,]),'valor':([4,],[5,]),}
+_lr_goto_items = {'instrucciones':([0,],[1,]),'impresion':([0,],[2,]),'for':([0,],[3,]),'valor':([6,],[8,]),'sigcomparacion':([16,],[17,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -28,7 +28,13 @@ del _lr_goto_items
 _lr_productions = [
   ("S' -> instrucciones","S'",1,None,None,None),
   ('instrucciones -> impresion','instrucciones',1,'p_instrucciones','sintactico.py',5),
-  ('impresion -> PRINT LPAREN valor RPAREN','impresion',4,'p_impresion','sintactico.py',8),
-  ('valor -> INT','valor',1,'p_valor','sintactico.py',11),
-  ('valor -> STRING','valor',1,'p_valor','sintactico.py',12),
+  ('instrucciones -> for','instrucciones',1,'p_instrucciones','sintactico.py',6),
+  ('impresion -> PRINT LPAREN valor RPAREN','impresion',4,'p_impresion','sintactico.py',9),
+  ('valor -> INT','valor',1,'p_valor','sintactico.py',13),
+  ('valor -> STRING','valor',1,'p_valor','sintactico.py',14),
+  ('sigcomparacion -> MENORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',19),
+  ('sigcomparacion -> MAYORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',20),
+  ('sigcomparacion -> DIFERENTE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',21),
+  ('sigcomparacion -> COMPARA_IGUAL','sigcomparacion',1,'p_signoscomparacion','sintactico.py',22),
+  ('for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET','for',13,'p_for','sintactico.py',24),
 ]

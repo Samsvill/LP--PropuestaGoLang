@@ -2,15 +2,27 @@ import ply.yacc as sintactico
 from lexico import tokens
 
 def p_instrucciones(p): #puede probar imprimir(var)
-  '''instrucciones : impresion'''  
+  '''instrucciones : impresion
+                      | for'''
 
 def p_impresion(p):
   'impresion : PRINT LPAREN valor RPAREN'
+
 
 def p_valor(p):
   '''valor : INT
           | STRING
           '''
+
+#--------------------------YANA-------------------------------
+def p_signoscomparacion(p):
+  '''sigcomparacion : MENORQUE
+                     | MAYORQUE
+                     | DIFERENTE
+                     | COMPARA_IGUAL'''
+def p_for(p):
+  '''for : FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA MAS MAS LCBRACKET '''
+
 
 #----------------------------SAM - MAPA -----------------------
 #def p_mapa(p):
@@ -50,12 +62,11 @@ parser = sintactico.yacc()
 def validaRegla(s):
   result = parser.parse(s)
   print(result)
+#Agregar al txt
+  file = open('log.txt', 'a')
+  file.write('\n' + s)
+  file.close()
 
-
-#--------------------TXT CON PRUEBAS---------------------
-#with open('log.txt', 'r') as file:
-#    data = file.read()
-#    validaRegla(data)
 
 #------------------WHILE-------------------------------
 while True:

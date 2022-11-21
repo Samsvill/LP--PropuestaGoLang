@@ -4,7 +4,6 @@ Unused terminals:
 
     BREAK
     CASE
-    COLON
     COMMA
     COMPARA_IGUAL
     COMPLEJO
@@ -19,9 +18,6 @@ Unused terminals:
     IF
     IMPORT
     INCREMENT
-    LBRACKET
-    LCBRACKET
-    MAP
     MAS
     MAYORQUE
     MENORQUE
@@ -29,31 +25,36 @@ Unused terminals:
     PRINTLN
     PRODUCTO
     PUNTO_COMA
-    RBRACKET
-    RCBRACKET
     RETURN
     SELECT
     STRUCT
     SWITCH
-    TINT
-    TSTRING
 
 Grammar
 
 Rule 0     S' -> instrucciones
 Rule 1     instrucciones -> asignacion
 Rule 2     instrucciones -> impresion
-Rule 3     asignacion -> VARIABLE IGUAL valor
-Rule 4     impresion -> PRINT LPAREN valor RPAREN
-Rule 5     valor -> INT
-Rule 6     valor -> STRING
-Rule 7     valor -> VARIABLE
+Rule 3     instrucciones -> mapa
+Rule 4     asignacion -> VARIABLE IGUAL valor
+Rule 5     impresion -> PRINT LPAREN valor RPAREN
+Rule 6     valor -> INT
+Rule 7     valor -> STRING
+Rule 8     TDATA -> TSTRING
+Rule 9     TDATA -> TINT
+Rule 10    mapa -> STRING EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
+Rule 11    adentro -> dato
+Rule 12    adentro -> dato adentro
+Rule 13    dato -> valor COLON valor
+Rule 14    tipo -> STRING
+Rule 15    tipo -> INT
+Rule 16    valor -> VARIABLE
 
 Terminals, with rules where they appear
 
 BREAK                : 
 CASE                 : 
-COLON                : 
+COLON                : 13
 COMMA                : 
 COMPARA_IGUAL        : 
 COMPLEJO             : 
@@ -66,160 +67,45 @@ FLOTANTE             :
 FOR                  : 
 FUNC                 : 
 IF                   : 
-IGUAL                : 3
+IGUAL                : 4
 IMPORT               : 
 INCREMENT            : 
-INT                  : 5
-LBRACKET             : 
-LCBRACKET            : 
-LPAREN               : 4
-MAP                  : 
+INT                  : 6 15
+LBRACKET             : 10
+LCBRACKET            : 10
+LPAREN               : 5
+MAP                  : 10
 MAS                  : 
 MAYORQUE             : 
 MENORQUE             : 
 MENOS                : 
-PRINT                : 4
+PRINT                : 5
 PRINTLN              : 
 PRODUCTO             : 
 PUNTO_COMA           : 
-RBRACKET             : 
-RCBRACKET            : 
+RBRACKET             : 10
+RCBRACKET            : 10
 RETURN               : 
-RPAREN               : 4
+RPAREN               : 5
 SELECT               : 
-STRING               : 6
+STRING               : 7 10 14
 STRUCT               : 
 SWITCH               : 
-TINT                 : 
-TSTRING              : 
-VARIABLE             : 3 7
+TINT                 : 9
+TSTRING              : 8
+VARIABLE             : 4 16
 error                : 
 
 Nonterminals, with rules where they appear
 
+EQUALS               : 10
+TDATA                : 10 10
+adentro              : 10 12
 asignacion           : 1
+dato                 : 11 12
 impresion            : 2
 instrucciones        : 0
-valor                : 3 4
-
-Parsing method: LALR
-
-state 0
-
-    (0) S' -> . instrucciones
-    (1) instrucciones -> . asignacion
-    (2) instrucciones -> . impresion
-    (3) asignacion -> . VARIABLE IGUAL valor
-    (4) impresion -> . PRINT LPAREN valor RPAREN
-
-    VARIABLE        shift and go to state 4
-    PRINT           shift and go to state 5
-
-    instrucciones                  shift and go to state 1
-    asignacion                     shift and go to state 2
-    impresion                      shift and go to state 3
-
-state 1
-
-    (0) S' -> instrucciones .
-
-
-
-state 2
-
-    (1) instrucciones -> asignacion .
-
-    $end            reduce using rule 1 (instrucciones -> asignacion .)
-
-
-state 3
-
-    (2) instrucciones -> impresion .
-
-    $end            reduce using rule 2 (instrucciones -> impresion .)
-
-
-state 4
-
-    (3) asignacion -> VARIABLE . IGUAL valor
-
-    IGUAL           shift and go to state 6
-
-
-state 5
-
-    (4) impresion -> PRINT . LPAREN valor RPAREN
-
-    LPAREN          shift and go to state 7
-
-
-state 6
-
-    (3) asignacion -> VARIABLE IGUAL . valor
-    (5) valor -> . INT
-    (6) valor -> . STRING
-    (7) valor -> . VARIABLE
-
-    INT             shift and go to state 10
-    STRING          shift and go to state 11
-    VARIABLE        shift and go to state 8
-
-    valor                          shift and go to state 9
-
-state 7
-
-    (4) impresion -> PRINT LPAREN . valor RPAREN
-    (5) valor -> . INT
-    (6) valor -> . STRING
-    (7) valor -> . VARIABLE
-
-    INT             shift and go to state 10
-    STRING          shift and go to state 11
-    VARIABLE        shift and go to state 8
-
-    valor                          shift and go to state 12
-
-state 8
-
-    (7) valor -> VARIABLE .
-
-    $end            reduce using rule 7 (valor -> VARIABLE .)
-    RPAREN          reduce using rule 7 (valor -> VARIABLE .)
-
-
-state 9
-
-    (3) asignacion -> VARIABLE IGUAL valor .
-
-    $end            reduce using rule 3 (asignacion -> VARIABLE IGUAL valor .)
-
-
-state 10
-
-    (5) valor -> INT .
-
-    $end            reduce using rule 5 (valor -> INT .)
-    RPAREN          reduce using rule 5 (valor -> INT .)
-
-
-state 11
-
-    (6) valor -> STRING .
-
-    $end            reduce using rule 6 (valor -> STRING .)
-    RPAREN          reduce using rule 6 (valor -> STRING .)
-
-
-state 12
-
-    (4) impresion -> PRINT LPAREN valor . RPAREN
-
-    RPAREN          shift and go to state 13
-
-
-state 13
-
-    (4) impresion -> PRINT LPAREN valor RPAREN .
-
-    $end            reduce using rule 4 (impresion -> PRINT LPAREN valor RPAREN .)
+mapa                 : 3
+tipo                 : 
+valor                : 4 5 13 13
 

@@ -32,7 +32,7 @@ tokens = [
   'RPAREN',
   'VARIABLE',
   'STRING',
-  'IGUAL',
+  'EQUALS',
   'MENORQUE',
   'MAYORQUE',
   'DIFERENTE',
@@ -55,7 +55,7 @@ t_PRODUCTO   = r'\*'
 t_DIVISION = r'/'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_IGUAL = r'='
+t_EQUALS = r'='
 t_MENORQUE = r'<'
 t_MAYORQUE = r'>'
 t_DIFERENTE = r'!='

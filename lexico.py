@@ -15,11 +15,17 @@ reserved = {
   'break' : 'BREAK',
   'default' : 'DEFAULT',
   'struct' : 'STRUCT',
+<<<<<<< Updated upstream
   'map':'MAP' #Sam}
+=======
+  'map' : 'MAP', #Sam
+  'string' : 'TSTRING',
+  'int' : 'TINT'
+>>>>>>> Stashed changes
 }
 
 tokens = [
-  'ENTERO',
+  'INT',
   'FLOTANTE',
   'COMPLEJO',
   'MENOS',
@@ -66,19 +72,16 @@ t_RBRACKET = r'\]'
 #t_DQMARK = r'"'
 t_COLON = r':'
 t_COMMA = r','
+t_STRING = r'"[a-zA-Z\w\s]*"'
 
 # DEFINICION DE TOKENS
 def t_FLOTANTE(t):
   r'\d+\.\d+'
   return t
   
-def t_ENTERO(t):
+def t_INT(t):
   r'\d+'
   t.value = int(t.value)
-  return t
-
-def t_COMPLEJO(t): #un tipo de dato nuevo
-  r'\d+j+' 
   return t
 
 def t_VARIABLE(t):
@@ -86,10 +89,6 @@ def t_VARIABLE(t):
   t.type = reserved.get(t.value,'VARIABLE')
   return t
 
-def t_STRING(t):
-  r'".*"'
-  t.type = reserved.get(t.value,'STRING')
-  return t
 
 def t_newline(t):
   r'\n+'
@@ -122,8 +121,8 @@ def getTokens(lexer):
 # PROBAR -------SAM----------------
 Sam_instruc = """
 nameAgeMap = map[string]int{
-  "James": 50,
-  "Ali":   39,
+"James" : 50,
+"Ali" :   39,
 }
 """
 lexer.input(Sam_instruc)

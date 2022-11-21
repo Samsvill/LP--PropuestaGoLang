@@ -15,13 +15,9 @@ reserved = {
   'break' : 'BREAK',
   'default' : 'DEFAULT',
   'struct' : 'STRUCT',
-<<<<<<< Updated upstream
-  'map':'MAP' #Sam}
-=======
   'map' : 'MAP', #Sam
   'string' : 'TSTRING',
   'int' : 'TINT'
->>>>>>> Stashed changes
 }
 
 tokens = [

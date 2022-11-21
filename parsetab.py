@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BREAK CASE COLON COMMA COMPARA_IGUAL COMPLEJO DEFAULT DIFERENTE DIVISION DQMARK ELSE FLOTANTE FOR FUNC IF IGUAL IMPORT INCREMENT INT LBRACKET LCBRACKET LPAREN MAP MAS MAYORQUE MENORQUE MENOS PRINT PRINTLN PRODUCTO PUNTO_COMA RBRACKET RCBRACKET RETURN RPAREN SELECT STRING STRUCT SWITCH TINT TSTRING VARIABLEinstrucciones : asignacion\n                    | impresion asignacion : VARIABLE IGUAL valorimpresion : PRINT LPAREN valor RPARENvalor : INT\n          | STRING\n          valor : VARIABLE'
+_lr_signature = 'BREAK CASE COLON COMMA COMPARA_IGUAL COMPLEJO DEFAULT DIFERENTE DIVISION DQMARK ELSE EQUALS FLOTANTE FOR FUNC IF IMPORT INCREMENT INT LBRACKET LCBRACKET LPAREN MAP MAS MAYORQUE MENORQUE MENOS PRINT PRINTLN PRODUCTO PUNTO_COMA RBRACKET RCBRACKET RETURN RPAREN SELECT STRING STRUCT SWITCH TINT TSTRING VARIABLEinstrucciones : impresionimpresion : PRINT LPAREN valor RPARENvalor : INT\n          | STRING\n          '
     
-_lr_action_items = {'VARIABLE':([0,6,7,],[4,8,8,]),'PRINT':([0,],[5,]),'$end':([1,2,3,8,9,10,11,13,],[0,-1,-2,-7,-3,-5,-6,-4,]),'IGUAL':([4,],[6,]),'LPAREN':([5,],[7,]),'INT':([6,7,],[10,10,]),'STRING':([6,7,],[11,11,]),'RPAREN':([8,10,11,12,],[-7,-5,-6,13,]),}
+_lr_action_items = {'PRINT':([0,],[3,]),'$end':([1,2,8,],[0,-1,-2,]),'LPAREN':([3,],[4,]),'INT':([4,],[6,]),'STRING':([4,],[7,]),'RPAREN':([5,6,7,],[8,-3,-4,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'instrucciones':([0,],[1,]),'asignacion':([0,],[2,]),'impresion':([0,],[3,]),'valor':([6,7,],[9,12,]),}
+_lr_goto_items = {'instrucciones':([0,],[1,]),'impresion':([0,],[2,]),'valor':([4,],[5,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,11 +27,8 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> instrucciones","S'",1,None,None,None),
-  ('instrucciones -> asignacion','instrucciones',1,'p_instrucciones','sintactico.py',5),
-  ('instrucciones -> impresion','instrucciones',1,'p_instrucciones','sintactico.py',6),
-  ('asignacion -> VARIABLE IGUAL valor','asignacion',3,'p_asignacion','sintactico.py',8),
-  ('impresion -> PRINT LPAREN valor RPAREN','impresion',4,'p_impresion','sintactico.py',11),
-  ('valor -> INT','valor',1,'p_valor','sintactico.py',14),
-  ('valor -> STRING','valor',1,'p_valor','sintactico.py',15),
-  ('valor -> VARIABLE','valor',1,'p_valor_variable','sintactico.py',19),
+  ('instrucciones -> impresion','instrucciones',1,'p_instrucciones','sintactico.py',5),
+  ('impresion -> PRINT LPAREN valor RPAREN','impresion',4,'p_impresion','sintactico.py',8),
+  ('valor -> INT','valor',1,'p_valor','sintactico.py',11),
+  ('valor -> STRING','valor',1,'p_valor','sintactico.py',12),
 ]

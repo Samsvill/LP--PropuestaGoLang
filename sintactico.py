@@ -1,42 +1,38 @@
 import ply.yacc as sintactico
 from lexico import tokens
 
-def p_instrucciones(p):
-  '''instrucciones : asignacion
-                    | impresion 
-                    | mapa'''  
-def p_asignacion(p): #puede reconocer a=20
-  'asignacion : VARIABLE IGUAL tipo'
+def p_instrucciones(p): #puede probar imprimir(var)
+  '''instrucciones : impresion'''  
 
 def p_impresion(p):
-  'impresion : PRINT LPAREN tipo RPAREN'
+  'impresion : PRINT LPAREN valor RPAREN'
 
-def p_tipoDato(p):
-  '''tipo : STRING 
-  | INT'''
-
+def p_valor(p):
+  '''valor : INT
+          | STRING
+          '''
 
 #----------------------------SAM - MAPA -----------------------
-def p_mapa(p):
-  '''mapa : STRING EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
-  '''
-
-def p_dataTokensAvailable(p):
-  '''TDATA : TSTRING 
-  | TINT
-  '''
-
-def p_adentro(p):
-  '''adentro : dato 
-  | dato adentro
-  '''
-
-def p_dato(p):
-  ''' dato : tipo COLON tipo
-  '''
-
-def p_valor_variable(p):
-  'valor : VARIABLE'
+#def p_mapa(p):
+#  '''mapa : STRING EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
+#  '''
+#
+#def p_dataTokensAvailable(p):
+#  '''TDATA : TSTRING 
+#  | TINT
+#  '''
+#
+#def p_adentro(p):
+#  '''adentro : dato 
+#  | dato adentro
+#  '''
+#
+#def p_dato(p):
+#  ''' dato : tipo COLON tipo
+#  '''
+#
+#def p_valor_variable(p):
+#  'valor : VARIABLE'
 
 #----------------------------FIN - SAM - MAPA -----------------------
 
@@ -55,6 +51,11 @@ def validaRegla(s):
   result = parser.parse(s)
   print(result)
 
+
+#--------------------TXT CON PRUEBAS---------------------
+#with open('log.txt', 'r') as file:
+#    data = file.read()
+#    validaRegla(data)
 
 #------------------WHILE-------------------------------
 while True:

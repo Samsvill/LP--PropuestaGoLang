@@ -1,22 +1,21 @@
 import ply.lex as lex
 
 reserved = {
-  'if':'IF', #YANA
+  'if':'IF', #YANALEEN PLUAS{
   'for':'FOR',
   'else' : 'ELSE',
-  'else if' : 'ELSE IF',
   'Print':'PRINT',
   'Println' : 'PRINTLN',
   'switch':'SWITCH',
   'return':'RETURN',
-  'func':'FUNC',#YANA
-  'select':'SELECT',
+  'func':'FUNC',#YANALEENPLUAS}
+  'select':'SELECT',#SAM{
   'import' : 'IMPORT',
   'case' : 'CASE',
   'break' : 'BREAK',
   'default' : 'DEFAULT',
   'struct' : 'STRUCT',
-  'map':'MAP' #Sam
+  'map':'MAP' #Sam}
 }
 
 tokens = [

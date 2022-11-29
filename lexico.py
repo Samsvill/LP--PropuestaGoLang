@@ -1,34 +1,33 @@
 import ply.lex as lex
 
 reserved = {
-  'if':'IF', #YANALEEN PLUAS{
+  'if':'IF', #YANALEEN PLUAS
   'for':'FOR',
   'else' : 'ELSE',
   'Print':'PRINT',
   'Println' : 'PRINTLN',
-
   'switch':'SWITCH',
   'return':'RETURN',
-  'func':'FUNC',#YANALEENPLUAS}
-  'select':'SELECT',#SAM{
+  'func':'FUNC',#YANALEENPLUAS
+  'select':'SELECT',#SAM
   'import' : 'IMPORT',
   'case' : 'CASE',
   'break' : 'BREAK',
   'default' : 'DEFAULT',
   'struct' : 'STRUCT',
   'map' : 'MAP', #Sam
-  'string' : 'TSTRING',
+  'String' : 'TSTRING',
   'int' : 'TINT'
 }
 
 tokens = [
   'INT',
-  'FLOTANTE',
+  'FLOAT',
   'COMPLEJO',
   'MENOS',
   'MAS',
-  'PRODUCTO',
-  'DIVISION',
+  'MUL',
+  'DIV',
   'LPAREN',
   'RPAREN',
   'VARIABLE',
@@ -46,14 +45,15 @@ tokens = [
   'RBRACKET',
   'DQMARK',
   'COLON',
-  'COMMA'
+  'COMMA',
+  'FASTDEC'
 ] + list(reserved.values())
 
 # TOKENS SIMPLES
 t_MAS     = r'\+'
 t_MENOS   = r'-'
-t_PRODUCTO   = r'\*'
-t_DIVISION = r'/'
+t_MUL   = r'\*'
+t_DIV = r'/'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_EQUALS = r'='
@@ -70,9 +70,10 @@ t_RBRACKET = r'\]'
 t_COLON = r':'
 t_COMMA = r','
 t_STRING = r'"[a-zA-Z\w\s]*"'
+t_FASTDEC = r':='
 
 # DEFINICION DE TOKENS
-def t_FLOTANTE(t):
+def t_FLOAT(t):
   r'\d+\.\d+'
   return t
   

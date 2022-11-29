@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BREAK CASE COLON COMMA COMPARA_IGUAL COMPLEJO DEFAULT DIFERENTE DIVISION DQMARK ELSE EQUALS FLOTANTE FOR FUNC IF IMPORT INCREMENT INT LBRACKET LCBRACKET LPAREN MAP MAS MAYORQUE MENORQUE MENOS PRINT PRINTLN PRODUCTO PUNTO_COMA RBRACKET RCBRACKET RETURN RPAREN SELECT STRING STRUCT SWITCH TINT TSTRING VARIABLEinstrucciones : impresion\n                      | forimpresion : PRINT LPAREN valor RPARENvalor : INT\n          | STRING\n          sigcomparacion : MENORQUE\n                     | MAYORQUE\n                     | DIFERENTE\n                     | COMPARA_IGUALfor : FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA MAS MAS LCBRACKET '
+_lr_signature = 'BREAK CASE COLON COMMA COMPARA_IGUAL COMPLEJO DEFAULT DIFERENTE DIVISION DQMARK ELSE EQUALS FLOAT FOR FUNC IF IMPORT INCREMENT INT LBRACKET LCBRACKET LPAREN MAP MAS MAYORQUE MENORQUE MENOS PRINT PRINTLN PRODUCTO PUNTO_COMA RBRACKET RCBRACKET RETURN RPAREN SELECT STRING STRUCT SWITCH TINT TSTRING VARIABLEinstrucciones : impresion\n                      | for\n                      | mapa\n                      impresion : PRINT LPAREN valor RPARENvalor : INT\n          | STRING\n          for : FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA MAS MAS LCBRACKET sigcomparacion : MENORQUE\n                     | MAYORQUE\n                     | DIFERENTE\n                     | COMPARA_IGUALmapa : VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET\n  TDATA : TSTRING \n  | TINT\n  adentro : dato \n  | dato adentro\n  tipo : INT \n  | STRING dato : tipo COLON tipo\n  valor : VARIABLE'
     
-_lr_action_items = {'PRINT':([0,],[4,]),'FOR':([0,],[5,]),'$end':([1,2,3,12,26,],[0,-1,-2,-3,-10,]),'LPAREN':([4,],[6,]),'VARIABLE':([5,15,],[7,16,]),'INT':([6,13,17,18,19,20,21,],[9,14,22,-6,-7,-8,-9,]),'STRING':([6,],[10,]),'COLON':([7,],[11,]),'RPAREN':([8,9,10,],[12,-4,-5,]),'EQUALS':([11,],[13,]),'PUNTO_COMA':([14,22,],[15,23,]),'MENORQUE':([16,],[18,]),'MAYORQUE':([16,],[19,]),'DIFERENTE':([16,],[20,]),'COMPARA_IGUAL':([16,],[21,]),'MAS':([23,24,],[24,25,]),'LCBRACKET':([25,],[26,]),}
+_lr_action_items = {'PRINT':([0,],[5,]),'FOR':([0,],[6,]),'VARIABLE':([0,6,8,24,],[7,9,14,26,]),'$end':([1,2,3,4,17,41,47,],[0,-1,-2,-3,-4,-12,-7,]),'LPAREN':([5,],[8,]),'EQUALS':([7,15,],[10,18,]),'INT':([8,18,28,29,30,31,32,33,36,38,39,43,45,],[12,20,34,-8,-9,-10,-11,38,38,-17,-18,38,-19,]),'STRING':([8,33,36,38,39,43,45,],[13,39,39,-17,-18,39,-19,]),'COLON':([9,37,38,39,],[15,43,-17,-18,]),'MAP':([10,],[16,]),'RPAREN':([11,12,13,14,],[17,-5,-6,-20,]),'LBRACKET':([16,],[19,]),'TSTRING':([19,25,],[22,22,]),'TINT':([19,25,],[23,23,]),'PUNTO_COMA':([20,34,],[24,40,]),'RBRACKET':([21,22,23,],[25,-13,-14,]),'LCBRACKET':([22,23,27,46,],[-13,-14,33,47,]),'MENORQUE':([26,],[29,]),'MAYORQUE':([26,],[30,]),'DIFERENTE':([26,],[31,]),'COMPARA_IGUAL':([26,],[32,]),'RCBRACKET':([35,36,38,39,42,45,],[41,-15,-17,-18,-16,-19,]),'MAS':([40,44,],[44,46,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'instrucciones':([0,],[1,]),'impresion':([0,],[2,]),'for':([0,],[3,]),'valor':([6,],[8,]),'sigcomparacion':([16,],[17,]),}
+_lr_goto_items = {'instrucciones':([0,],[1,]),'impresion':([0,],[2,]),'for':([0,],[3,]),'mapa':([0,],[4,]),'valor':([8,],[11,]),'TDATA':([19,25,],[21,27,]),'sigcomparacion':([26,],[28,]),'adentro':([33,36,],[35,42,]),'dato':([33,36,],[36,36,]),'tipo':([33,36,43,],[37,37,45,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -29,12 +29,22 @@ _lr_productions = [
   ("S' -> instrucciones","S'",1,None,None,None),
   ('instrucciones -> impresion','instrucciones',1,'p_instrucciones','sintactico.py',5),
   ('instrucciones -> for','instrucciones',1,'p_instrucciones','sintactico.py',6),
-  ('impresion -> PRINT LPAREN valor RPAREN','impresion',4,'p_impresion','sintactico.py',9),
-  ('valor -> INT','valor',1,'p_valor','sintactico.py',13),
-  ('valor -> STRING','valor',1,'p_valor','sintactico.py',14),
-  ('sigcomparacion -> MENORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',19),
-  ('sigcomparacion -> MAYORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',20),
-  ('sigcomparacion -> DIFERENTE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',21),
-  ('sigcomparacion -> COMPARA_IGUAL','sigcomparacion',1,'p_signoscomparacion','sintactico.py',22),
-  ('for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET','for',13,'p_for','sintactico.py',24),
+  ('instrucciones -> mapa','instrucciones',1,'p_instrucciones','sintactico.py',7),
+  ('impresion -> PRINT LPAREN valor RPAREN','impresion',4,'p_impresion','sintactico.py',11),
+  ('valor -> INT','valor',1,'p_valor','sintactico.py',15),
+  ('valor -> STRING','valor',1,'p_valor','sintactico.py',16),
+  ('for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET','for',13,'p_for','sintactico.py',21),
+  ('sigcomparacion -> MENORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',23),
+  ('sigcomparacion -> MAYORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',24),
+  ('sigcomparacion -> DIFERENTE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',25),
+  ('sigcomparacion -> COMPARA_IGUAL','sigcomparacion',1,'p_signoscomparacion','sintactico.py',26),
+  ('mapa -> VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET','mapa',10,'p_mapa','sintactico.py',30),
+  ('TDATA -> TSTRING','TDATA',1,'p_dataTokensAvailable','sintactico.py',34),
+  ('TDATA -> TINT','TDATA',1,'p_dataTokensAvailable','sintactico.py',35),
+  ('adentro -> dato','adentro',1,'p_adentro','sintactico.py',39),
+  ('adentro -> dato adentro','adentro',2,'p_adentro','sintactico.py',40),
+  ('tipo -> INT','tipo',1,'p_tipo','sintactico.py',44),
+  ('tipo -> STRING','tipo',1,'p_tipo','sintactico.py',45),
+  ('dato -> tipo COLON tipo','dato',3,'p_dato','sintactico.py',48),
+  ('valor -> VARIABLE','valor',1,'p_valor_variable','sintactico.py',52),
 ]

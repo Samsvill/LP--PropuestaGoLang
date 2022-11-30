@@ -7,7 +7,11 @@ from lexico import tokens
 def p_instrucciones(p): #puede probar imprimir(var)
   '''instrucciones : impresion
                       | for
+                      | for2
+                      | for3
                       | mapa
+                      | si
+                      | array
                       '''
 
 def p_impresion(p):
@@ -19,14 +23,42 @@ def p_valor(p):
           | STRING
           '''
 
-#-------------------------- YANA - FOR ------------------------
+#-------------------------- YANA - FOR (ESTRUCTURA DE CONTROL) ------------------------
+
+#for con ciclo comun
 def p_for(p):
-  '''for : FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA MAS MAS LCBRACKET '''
+  'for : FOR VARIABLE FASTDEC  INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA VARIABLE MASMAS LCBRACKET '
+
+#for estilo while
+def p_for2(p):
+  'for2 : FOR VARIABLE sigcomparacion INT LCBRACKET'
+
+#for infinito
+def p_for3(p):
+  'for3 : FOR LCBRACKET instrucciones RCBRACKET'
+
+
 def p_signoscomparacion(p):
   '''sigcomparacion : MENORQUE
                      | MAYORQUE
                      | DIFERENTE
                      | COMPARA_IGUAL'''
+
+
+
+#----------------------------FIN FOR---------------------------
+
+#--------------ARRAY - YANA (ESTRUCTURA DE DATOS) -------------
+
+def p_array(p):
+  '''array : VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATA LCBRACKET elementArray RCBRACKET
+            | VARIABLE FASTDEC LBRACKET INT TDATA LCBRACKET elementArray RCBRACKET'''
+
+def p_elementArray(p) :
+  '''elementArray : valor
+                   | valor COMMA elementArray '''
+
+#----------------------- FIN - ARRAY -------------------------
 
 #----------------------------SAM - MAPA -----------------------
 def p_mapa(p):
@@ -52,7 +84,7 @@ def p_dato(p):
   '''
 
 def p_valor_variable(p):
-  'valor : VARIABLE'
+  'valorV : VARIABLE'
 
 #----------------------------FIN - SAM - MAPA -----------------------
 
@@ -66,7 +98,7 @@ def p_logico(p):
   | MENORQUE'''
 
 def p_if(p):
-  "si : IF condicion LCBRACKET bloque RCBRACKET"
+  "si : IF  LCBRACKET bloque RCBRACKET"
 
 #------------------------- FIN - IF - SAM ---------------------------
 

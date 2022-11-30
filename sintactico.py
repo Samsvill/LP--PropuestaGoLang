@@ -12,6 +12,9 @@ def p_instrucciones(p): #REGLA PADRE !!!
                       | mapa
                       | si
                       | array
+                      | funcion
+                      | concatDatos
+                      | ArraySemantica
                       '''
 
 #---------------------------IMPRESION DE DATOS----------------------------------------
@@ -61,6 +64,22 @@ def p_elementArray(p) :
 
 #----------------------- FIN - ARRAY -------------------------
 
+#-------------------- DECLARACION DE FUNCIONES - YANA ------------------
+#FUNCION BASICA
+def p_funciones(p):
+  '''funcion : FUNC nombreFuncion LPAREN RPAREN LCBRACKET instrucciones RCBRACKET
+              | FUNC nombreFuncion LPAREN parametrosF RPAREN LCBRACKET instrucciones RCBRACKET'''
+def p_nombreFuncion(p):
+  'nombreFuncion : VARIABLE'
+
+def p_parametrosfuncion(p):
+  '''parametrosF : VARIABLE TDATA
+                | VARIABLE TDATA COMMA parametrosF'''
+def p_variablesRetorno(p):
+  '''varRetornoF : '''
+
+
+
 #----------------------------SAM - MAPA (ESTRUCTURA DE DATOS) -----------------------
 def p_mapa(p):
   '''mapa : VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
@@ -85,6 +104,26 @@ def p_if(p):
 def p_bloquecomparacion(p):
   "comparacion : dato sigcomparacion dato"
 #------------------------- FIN - IF - SAM ---------------------------
+
+#------------------------REGLAS SEMANTICAS--------------------------
+#--------------------------- YANALEEN ------------------------------
+#El operador + no puede usarse entre dos tipos de datos diferentes
+def p_ConcatenacionDeDatos(p):
+  '''concatDatos : STRING MAS STRING
+                  | INT MAS INT '''
+
+#Los arreglos en GO solo pueden contener elementos de un mismo tipo
+def p_SemanticaARRAY(p):
+  '''ArraySemantica :  VAR VARIABLE EQUALS LBRACKET INT RBRACKET TSTRING LCBRACKET elementStringS RCBRACKET
+            | VARIABLE FASTDEC LBRACKET INT TINT LCBRACKET elementIntS RCBRACKET'''
+
+
+def p_ElementstringA(p):
+  '''elementStringS : STRING
+                   | STRING COMMA elementStringS '''
+def p_ElementIntA(p):
+  '''elementIntS : INT
+                   | INT COMMA elementIntS '''
 
  # ERRORES DE SINTAXIS
 def p_error(p):

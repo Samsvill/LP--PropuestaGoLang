@@ -4,7 +4,7 @@ from lexico import tokens
 
 
 
-def p_instrucciones(p): #puede probar imprimir(var)
+def p_instrucciones(p): #REGLA PADRE !!!
   '''instrucciones : impresion
                       | for
                       | for2
@@ -14,14 +14,15 @@ def p_instrucciones(p): #puede probar imprimir(var)
                       | array
                       '''
 
+#---------------------------IMPRESION DE DATOS----------------------------------------
 def p_impresion(p):
-  'impresion : PRINT LPAREN valor RPAREN'
+  'impresion : PRINT LPAREN dato RPAREN'
 
-
-def p_valor(p):
-  '''valor : INT
-          | STRING
-          '''
+def p_dato(p):
+  '''dato : INT 
+  | STRING
+  | FLOAT
+  | VARIABLE'''
 
 #-------------------------- YANA - FOR (ESTRUCTURA DE CONTROL) ------------------------
 
@@ -51,58 +52,41 @@ def p_signoscomparacion(p):
 #--------------ARRAY - YANA (ESTRUCTURA DE DATOS) -------------
 
 def p_array(p):
-  '''array : VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATA LCBRACKET elementArray RCBRACKET
-            | VARIABLE FASTDEC LBRACKET INT TDATA LCBRACKET elementArray RCBRACKET'''
+  '''array : VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
+            | VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET'''
 
 def p_elementArray(p) :
-  '''elementArray : valor
-                   | valor COMMA elementArray '''
+  '''elementArray : dato
+                   | dato COMMA elementArray '''
 
 #----------------------- FIN - ARRAY -------------------------
 
-#----------------------------SAM - MAPA -----------------------
+#----------------------------SAM - MAPA (ESTRUCTURA DE DATOS) -----------------------
 def p_mapa(p):
-  '''mapa : VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
+  '''mapa : VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
   '''
-
 def p_dataTokensAvailable(p):
-  '''TDATA : TSTRING 
+  '''TDATO : TSTRING 
   | TINT
+  | TFLOAT
   '''
-
 def p_adentro(p):
-  '''adentro : dato 
-  | dato adentro
+  '''adentro : definicion 
+  | definicion COMMA adentro
   '''
-
-def p_tipo(p):
-  '''tipo : INT 
-  | STRING'''
-
-def p_dato(p):
-  ''' dato : tipo COLON tipo
+def p_definicion(p):
+  ''' definicion : dato COLON dato
   '''
-
-def p_valor_variable(p):
-  'valorV : VARIABLE'
-
 #----------------------------FIN - SAM - MAPA -----------------------
 
 #---------------------------- IF - SAM ------------------------------
-
-def p_bloquecodigo(p):
-  "bloque : instrucciones "
-def p_logico(p):
-  '''logicos : COMPARA_IGUAL
-  | MAYORQUE
-  | MENORQUE'''
-
 def p_if(p):
-  "si : IF  LCBRACKET bloque RCBRACKET"
-
+  "si : IF comparacion LCBRACKET instrucciones RCBRACKET"
+def p_bloquecomparacion(p):
+  "comparacion : dato sigcomparacion dato"
 #------------------------- FIN - IF - SAM ---------------------------
 
- # Error rule for syntax errors
+ # ERRORES DE SINTAXIS
 def p_error(p):
   if p:
     print(f"Error de sintaxis - Token: {p.type}, Línea: {p.lineno}, Col: {p.lexpos}")
@@ -117,8 +101,6 @@ def validaRegla(s):
   result = parser.parse(s)
   print(result)
 #------------------Agregar al txt----------------------
-  
-
 
 #proyecto lenguaje y libreria
 #------------------WHILE-------------------------------

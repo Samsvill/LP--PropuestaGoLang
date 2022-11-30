@@ -18,6 +18,7 @@ reserved = {
   'map' : 'MAP', #Sam
   'String' : 'TSTRING',
   'int' : 'TINT',#YANALEEN {
+  'float' : 'TFLOAT',
   'interface' : 'INTERFACE',
   'defer' : 'DEFER',
   'go' : 'GO',
@@ -25,7 +26,6 @@ reserved = {
   'goto' : 'GOTO',
   'const' : 'CONST',
   'fallthrough' : 'FALLTHROUGH',
-  'range' : 'RANGE',
   'type' : 'TYPE',
   'var' : 'VAR',
   'continue' : 'CONTINUE'#YANALEEN }
@@ -35,7 +35,6 @@ reserved = {
 tokens = [
   'INT',
   'FLOAT',
-  'COMPLEJO',
   'MENOS',
   'MAS',
   'MUL',
@@ -99,6 +98,7 @@ def t_VARIABLE(t):
   r'[a-zA-Z_][a-zA-Z0-9]*'
   t.type = reserved.get(t.value,'VARIABLE')
   return t
+
 def t_MASMAS(t):
   r'\+\+'
   return t
@@ -107,9 +107,9 @@ def t_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
 
-def t_INCREMENT(t):
-  r'\+{2}'
-  return t
+#def t_INCREMENT(t):
+#  r'\+{2}'
+#  return t
 
  
 # IGNORAR
@@ -139,9 +139,10 @@ nameAgeMap = map[string]int{
 }
 """
 
-#Agregar mi algoritmo que pruebe todos los tockens
+#Agregar mi algoritmo que pruebe todos los tokens
 lexer.input(Sam_instruc)
 getTokens(lexer)
+
 # FIN PROBAR -------SAM----------------
 
 # SEGUIR LEYENDO

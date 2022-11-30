@@ -4,107 +4,142 @@ Unused terminals:
 
     BREAK
     CASE
-    COMMA
-    COMPLEJO
+    CHAN
+    CONST
+    CONTINUE
     DEFAULT
-    DIVISION
+    DEFER
+    DIV
     DQMARK
     ELSE
-    FLOAT
+    FALLTHROUGH
     FUNC
-    IF
+    GO
+    GOTO
     IMPORT
     INCREMENT
+    INTERFACE
+    MAS
     MENOS
+    MUL
     PRINTLN
-    PRODUCTO
     RETURN
     SELECT
     STRUCT
     SWITCH
+    TYPE
 
 Grammar
 
 Rule 0     S' -> instrucciones
 Rule 1     instrucciones -> impresion
 Rule 2     instrucciones -> for
-Rule 3     instrucciones -> mapa
-Rule 4     impresion -> PRINT LPAREN valor RPAREN
-Rule 5     valor -> INT
-Rule 6     valor -> STRING
-Rule 7     for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
-Rule 8     sigcomparacion -> MENORQUE
-Rule 9     sigcomparacion -> MAYORQUE
-Rule 10    sigcomparacion -> DIFERENTE
-Rule 11    sigcomparacion -> COMPARA_IGUAL
-Rule 12    mapa -> VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
-Rule 13    TDATA -> TSTRING
-Rule 14    TDATA -> TINT
-Rule 15    adentro -> dato
-Rule 16    adentro -> dato adentro
-Rule 17    tipo -> INT
-Rule 18    tipo -> STRING
-Rule 19    dato -> tipo COLON tipo
-Rule 20    valor -> VARIABLE
+Rule 3     instrucciones -> for2
+Rule 4     instrucciones -> for3
+Rule 5     instrucciones -> mapa
+Rule 6     instrucciones -> si
+Rule 7     instrucciones -> array
+Rule 8     impresion -> PRINT LPAREN dato RPAREN
+Rule 9     dato -> INT
+Rule 10    dato -> STRING
+Rule 11    dato -> FLOAT
+Rule 12    dato -> VARIABLE
+Rule 13    for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+Rule 14    for2 -> FOR VARIABLE sigcomparacion INT LCBRACKET
+Rule 15    for3 -> FOR LCBRACKET instrucciones RCBRACKET
+Rule 16    sigcomparacion -> MENORQUE
+Rule 17    sigcomparacion -> MAYORQUE
+Rule 18    sigcomparacion -> DIFERENTE
+Rule 19    sigcomparacion -> COMPARA_IGUAL
+Rule 20    array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
+Rule 21    array -> VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET
+Rule 22    elementArray -> dato
+Rule 23    elementArray -> dato COMMA elementArray
+Rule 24    mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
+Rule 25    TDATO -> TSTRING
+Rule 26    TDATO -> TINT
+Rule 27    TDATO -> TFLOAT
+Rule 28    adentro -> definicion
+Rule 29    adentro -> definicion COMMA adentro
+Rule 30    definicion -> dato COLON dato
+Rule 31    si -> IF comparacion LCBRACKET instrucciones RCBRACKET
+Rule 32    comparacion -> dato sigcomparacion dato
 
 Terminals, with rules where they appear
 
 BREAK                : 
 CASE                 : 
-COLON                : 7 19
-COMMA                : 
-COMPARA_IGUAL        : 11
-COMPLEJO             : 
+CHAN                 : 
+COLON                : 30
+COMMA                : 23 29
+COMPARA_IGUAL        : 19
+CONST                : 
+CONTINUE             : 
 DEFAULT              : 
-DIFERENTE            : 10
-DIVISION             : 
+DEFER                : 
+DIFERENTE            : 18
+DIV                  : 
 DQMARK               : 
 ELSE                 : 
-EQUALS               : 7 12
-FLOAT                : 
-FOR                  : 7
+EQUALS               : 20 24
+FALLTHROUGH          : 
+FASTDEC              : 13 21
+FLOAT                : 11
+FOR                  : 13 14 15
 FUNC                 : 
-IF                   : 
+GO                   : 
+GOTO                 : 
+IF                   : 31
 IMPORT               : 
 INCREMENT            : 
-INT                  : 5 7 7 17
-LBRACKET             : 12
-LCBRACKET            : 7 12
-LPAREN               : 4
-MAP                  : 12
-MAS                  : 7 7
-MAYORQUE             : 9
-MENORQUE             : 8
+INT                  : 9 13 13 14 20 21
+INTERFACE            : 
+LBRACKET             : 20 21 24
+LCBRACKET            : 13 14 15 20 21 24 31
+LPAREN               : 8
+MAP                  : 24
+MAS                  : 
+MASMAS               : 13
+MAYORQUE             : 17
+MENORQUE             : 16
 MENOS                : 
-PRINT                : 4
+MUL                  : 
+PRINT                : 8
 PRINTLN              : 
-PRODUCTO             : 
-PUNTO_COMA           : 7 7
-RBRACKET             : 12
-RCBRACKET            : 12
+PUNTO_COMA           : 13 13
+RBRACKET             : 20 24
+RCBRACKET            : 15 20 21 24 31
 RETURN               : 
-RPAREN               : 4
+RPAREN               : 8
 SELECT               : 
-STRING               : 6 18
+STRING               : 10
 STRUCT               : 
 SWITCH               : 
-TINT                 : 14
-TSTRING              : 13
-VARIABLE             : 7 7 12 20
+TFLOAT               : 27
+TINT                 : 26
+TSTRING              : 25
+TYPE                 : 
+VAR                  : 20
+VARIABLE             : 12 13 13 13 14 20 21 24
 error                : 
 
 Nonterminals, with rules where they appear
 
-TDATA                : 12 12
-adentro              : 12 16
-dato                 : 15 16
+TDATO                : 20 21 24 24
+adentro              : 24 29
+array                : 7
+comparacion          : 31
+dato                 : 8 22 23 30 30 32 32
+definicion           : 28 29
+elementArray         : 20 21 23
 for                  : 2
+for2                 : 3
+for3                 : 4
 impresion            : 1
-instrucciones        : 0
-mapa                 : 3
-sigcomparacion       : 7
-tipo                 : 19 19
-valor                : 4
+instrucciones        : 15 31 0
+mapa                 : 5
+si                   : 6
+sigcomparacion       : 13 14 32
 
 Parsing method: LALR
 
@@ -113,19 +148,34 @@ state 0
     (0) S' -> . instrucciones
     (1) instrucciones -> . impresion
     (2) instrucciones -> . for
-    (3) instrucciones -> . mapa
-    (4) impresion -> . PRINT LPAREN valor RPAREN
-    (7) for -> . FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
-    (12) mapa -> . VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
+    (3) instrucciones -> . for2
+    (4) instrucciones -> . for3
+    (5) instrucciones -> . mapa
+    (6) instrucciones -> . si
+    (7) instrucciones -> . array
+    (8) impresion -> . PRINT LPAREN dato RPAREN
+    (13) for -> . FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+    (14) for2 -> . FOR VARIABLE sigcomparacion INT LCBRACKET
+    (15) for3 -> . FOR LCBRACKET instrucciones RCBRACKET
+    (24) mapa -> . VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
+    (31) si -> . IF comparacion LCBRACKET instrucciones RCBRACKET
+    (20) array -> . VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
+    (21) array -> . VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET
 
-    PRINT           shift and go to state 5
-    FOR             shift and go to state 6
-    VARIABLE        shift and go to state 7
+    PRINT           shift and go to state 9
+    FOR             shift and go to state 10
+    VARIABLE        shift and go to state 11
+    IF              shift and go to state 12
+    VAR             shift and go to state 13
 
     instrucciones                  shift and go to state 1
     impresion                      shift and go to state 2
     for                            shift and go to state 3
-    mapa                           shift and go to state 4
+    for2                           shift and go to state 4
+    for3                           shift and go to state 5
+    mapa                           shift and go to state 6
+    si                             shift and go to state 7
+    array                          shift and go to state 8
 
 state 1
 
@@ -138,6 +188,7 @@ state 2
     (1) instrucciones -> impresion .
 
     $end            reduce using rule 1 (instrucciones -> impresion .)
+    RCBRACKET       reduce using rule 1 (instrucciones -> impresion .)
 
 
 state 3
@@ -145,186 +196,124 @@ state 3
     (2) instrucciones -> for .
 
     $end            reduce using rule 2 (instrucciones -> for .)
+    RCBRACKET       reduce using rule 2 (instrucciones -> for .)
 
 
 state 4
 
-    (3) instrucciones -> mapa .
+    (3) instrucciones -> for2 .
 
-    $end            reduce using rule 3 (instrucciones -> mapa .)
+    $end            reduce using rule 3 (instrucciones -> for2 .)
+    RCBRACKET       reduce using rule 3 (instrucciones -> for2 .)
 
 
 state 5
 
-    (4) impresion -> PRINT . LPAREN valor RPAREN
+    (4) instrucciones -> for3 .
 
-    LPAREN          shift and go to state 8
+    $end            reduce using rule 4 (instrucciones -> for3 .)
+    RCBRACKET       reduce using rule 4 (instrucciones -> for3 .)
 
 
 state 6
 
-    (7) for -> FOR . VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
+    (5) instrucciones -> mapa .
 
-    VARIABLE        shift and go to state 9
+    $end            reduce using rule 5 (instrucciones -> mapa .)
+    RCBRACKET       reduce using rule 5 (instrucciones -> mapa .)
 
 
 state 7
 
-    (12) mapa -> VARIABLE . EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
+    (6) instrucciones -> si .
 
-    EQUALS          shift and go to state 10
+    $end            reduce using rule 6 (instrucciones -> si .)
+    RCBRACKET       reduce using rule 6 (instrucciones -> si .)
 
 
 state 8
 
-    (4) impresion -> PRINT LPAREN . valor RPAREN
-    (5) valor -> . INT
-    (6) valor -> . STRING
-    (20) valor -> . VARIABLE
+    (7) instrucciones -> array .
 
-    INT             shift and go to state 12
-    STRING          shift and go to state 13
-    VARIABLE        shift and go to state 14
+    $end            reduce using rule 7 (instrucciones -> array .)
+    RCBRACKET       reduce using rule 7 (instrucciones -> array .)
 
-    valor                          shift and go to state 11
 
 state 9
 
-    (7) for -> FOR VARIABLE . COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
+    (8) impresion -> PRINT . LPAREN dato RPAREN
 
-    COLON           shift and go to state 15
+    LPAREN          shift and go to state 14
 
 
 state 10
 
-    (12) mapa -> VARIABLE EQUALS . MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
+    (13) for -> FOR . VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+    (14) for2 -> FOR . VARIABLE sigcomparacion INT LCBRACKET
+    (15) for3 -> FOR . LCBRACKET instrucciones RCBRACKET
 
-    MAP             shift and go to state 16
+    VARIABLE        shift and go to state 15
+    LCBRACKET       shift and go to state 16
 
 
 state 11
 
-    (4) impresion -> PRINT LPAREN valor . RPAREN
+    (24) mapa -> VARIABLE . EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
+    (21) array -> VARIABLE . FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET
 
-    RPAREN          shift and go to state 17
+    EQUALS          shift and go to state 17
+    FASTDEC         shift and go to state 18
 
 
 state 12
 
-    (5) valor -> INT .
+    (31) si -> IF . comparacion LCBRACKET instrucciones RCBRACKET
+    (32) comparacion -> . dato sigcomparacion dato
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
 
-    RPAREN          reduce using rule 5 (valor -> INT .)
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
 
+    comparacion                    shift and go to state 19
+    dato                           shift and go to state 20
 
 state 13
 
-    (6) valor -> STRING .
+    (20) array -> VAR . VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
 
-    RPAREN          reduce using rule 6 (valor -> STRING .)
+    VARIABLE        shift and go to state 25
 
 
 state 14
 
-    (20) valor -> VARIABLE .
+    (8) impresion -> PRINT LPAREN . dato RPAREN
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
 
-    RPAREN          reduce using rule 20 (valor -> VARIABLE .)
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
 
+    dato                           shift and go to state 26
 
 state 15
 
-    (7) for -> FOR VARIABLE COLON . EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
+    (13) for -> FOR VARIABLE . FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+    (14) for2 -> FOR VARIABLE . sigcomparacion INT LCBRACKET
+    (16) sigcomparacion -> . MENORQUE
+    (17) sigcomparacion -> . MAYORQUE
+    (18) sigcomparacion -> . DIFERENTE
+    (19) sigcomparacion -> . COMPARA_IGUAL
 
-    EQUALS          shift and go to state 18
-
-
-state 16
-
-    (12) mapa -> VARIABLE EQUALS MAP . LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
-
-    LBRACKET        shift and go to state 19
-
-
-state 17
-
-    (4) impresion -> PRINT LPAREN valor RPAREN .
-
-    $end            reduce using rule 4 (impresion -> PRINT LPAREN valor RPAREN .)
-
-
-state 18
-
-    (7) for -> FOR VARIABLE COLON EQUALS . INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
-
-    INT             shift and go to state 20
-
-
-state 19
-
-    (12) mapa -> VARIABLE EQUALS MAP LBRACKET . TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
-    (13) TDATA -> . TSTRING
-    (14) TDATA -> . TINT
-
-    TSTRING         shift and go to state 22
-    TINT            shift and go to state 23
-
-    TDATA                          shift and go to state 21
-
-state 20
-
-    (7) for -> FOR VARIABLE COLON EQUALS INT . PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
-
-    PUNTO_COMA      shift and go to state 24
-
-
-state 21
-
-    (12) mapa -> VARIABLE EQUALS MAP LBRACKET TDATA . RBRACKET TDATA LCBRACKET adentro RCBRACKET
-
-    RBRACKET        shift and go to state 25
-
-
-state 22
-
-    (13) TDATA -> TSTRING .
-
-    RBRACKET        reduce using rule 13 (TDATA -> TSTRING .)
-    LCBRACKET       reduce using rule 13 (TDATA -> TSTRING .)
-
-
-state 23
-
-    (14) TDATA -> TINT .
-
-    RBRACKET        reduce using rule 14 (TDATA -> TINT .)
-    LCBRACKET       reduce using rule 14 (TDATA -> TINT .)
-
-
-state 24
-
-    (7) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA . VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
-
-    VARIABLE        shift and go to state 26
-
-
-state 25
-
-    (12) mapa -> VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET . TDATA LCBRACKET adentro RCBRACKET
-    (13) TDATA -> . TSTRING
-    (14) TDATA -> . TINT
-
-    TSTRING         shift and go to state 22
-    TINT            shift and go to state 23
-
-    TDATA                          shift and go to state 27
-
-state 26
-
-    (7) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE . sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET
-    (8) sigcomparacion -> . MENORQUE
-    (9) sigcomparacion -> . MAYORQUE
-    (10) sigcomparacion -> . DIFERENTE
-    (11) sigcomparacion -> . COMPARA_IGUAL
-
+    FASTDEC         shift and go to state 27
     MENORQUE        shift and go to state 29
     MAYORQUE        shift and go to state 30
     DIFERENTE       shift and go to state 31
@@ -332,181 +321,721 @@ state 26
 
     sigcomparacion                 shift and go to state 28
 
+state 16
+
+    (15) for3 -> FOR LCBRACKET . instrucciones RCBRACKET
+    (1) instrucciones -> . impresion
+    (2) instrucciones -> . for
+    (3) instrucciones -> . for2
+    (4) instrucciones -> . for3
+    (5) instrucciones -> . mapa
+    (6) instrucciones -> . si
+    (7) instrucciones -> . array
+    (8) impresion -> . PRINT LPAREN dato RPAREN
+    (13) for -> . FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+    (14) for2 -> . FOR VARIABLE sigcomparacion INT LCBRACKET
+    (15) for3 -> . FOR LCBRACKET instrucciones RCBRACKET
+    (24) mapa -> . VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
+    (31) si -> . IF comparacion LCBRACKET instrucciones RCBRACKET
+    (20) array -> . VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
+    (21) array -> . VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET
+
+    PRINT           shift and go to state 9
+    FOR             shift and go to state 10
+    VARIABLE        shift and go to state 11
+    IF              shift and go to state 12
+    VAR             shift and go to state 13
+
+    instrucciones                  shift and go to state 33
+    impresion                      shift and go to state 2
+    for                            shift and go to state 3
+    for2                           shift and go to state 4
+    for3                           shift and go to state 5
+    mapa                           shift and go to state 6
+    si                             shift and go to state 7
+    array                          shift and go to state 8
+
+state 17
+
+    (24) mapa -> VARIABLE EQUALS . MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
+
+    MAP             shift and go to state 34
+
+
+state 18
+
+    (21) array -> VARIABLE FASTDEC . LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET
+
+    LBRACKET        shift and go to state 35
+
+
+state 19
+
+    (31) si -> IF comparacion . LCBRACKET instrucciones RCBRACKET
+
+    LCBRACKET       shift and go to state 36
+
+
+state 20
+
+    (32) comparacion -> dato . sigcomparacion dato
+    (16) sigcomparacion -> . MENORQUE
+    (17) sigcomparacion -> . MAYORQUE
+    (18) sigcomparacion -> . DIFERENTE
+    (19) sigcomparacion -> . COMPARA_IGUAL
+
+    MENORQUE        shift and go to state 29
+    MAYORQUE        shift and go to state 30
+    DIFERENTE       shift and go to state 31
+    COMPARA_IGUAL   shift and go to state 32
+
+    sigcomparacion                 shift and go to state 37
+
+state 21
+
+    (9) dato -> INT .
+
+    MENORQUE        reduce using rule 9 (dato -> INT .)
+    MAYORQUE        reduce using rule 9 (dato -> INT .)
+    DIFERENTE       reduce using rule 9 (dato -> INT .)
+    COMPARA_IGUAL   reduce using rule 9 (dato -> INT .)
+    RPAREN          reduce using rule 9 (dato -> INT .)
+    LCBRACKET       reduce using rule 9 (dato -> INT .)
+    COMMA           reduce using rule 9 (dato -> INT .)
+    RCBRACKET       reduce using rule 9 (dato -> INT .)
+    COLON           reduce using rule 9 (dato -> INT .)
+
+
+state 22
+
+    (10) dato -> STRING .
+
+    MENORQUE        reduce using rule 10 (dato -> STRING .)
+    MAYORQUE        reduce using rule 10 (dato -> STRING .)
+    DIFERENTE       reduce using rule 10 (dato -> STRING .)
+    COMPARA_IGUAL   reduce using rule 10 (dato -> STRING .)
+    RPAREN          reduce using rule 10 (dato -> STRING .)
+    LCBRACKET       reduce using rule 10 (dato -> STRING .)
+    COMMA           reduce using rule 10 (dato -> STRING .)
+    RCBRACKET       reduce using rule 10 (dato -> STRING .)
+    COLON           reduce using rule 10 (dato -> STRING .)
+
+
+state 23
+
+    (11) dato -> FLOAT .
+
+    MENORQUE        reduce using rule 11 (dato -> FLOAT .)
+    MAYORQUE        reduce using rule 11 (dato -> FLOAT .)
+    DIFERENTE       reduce using rule 11 (dato -> FLOAT .)
+    COMPARA_IGUAL   reduce using rule 11 (dato -> FLOAT .)
+    RPAREN          reduce using rule 11 (dato -> FLOAT .)
+    LCBRACKET       reduce using rule 11 (dato -> FLOAT .)
+    COMMA           reduce using rule 11 (dato -> FLOAT .)
+    RCBRACKET       reduce using rule 11 (dato -> FLOAT .)
+    COLON           reduce using rule 11 (dato -> FLOAT .)
+
+
+state 24
+
+    (12) dato -> VARIABLE .
+
+    MENORQUE        reduce using rule 12 (dato -> VARIABLE .)
+    MAYORQUE        reduce using rule 12 (dato -> VARIABLE .)
+    DIFERENTE       reduce using rule 12 (dato -> VARIABLE .)
+    COMPARA_IGUAL   reduce using rule 12 (dato -> VARIABLE .)
+    RPAREN          reduce using rule 12 (dato -> VARIABLE .)
+    LCBRACKET       reduce using rule 12 (dato -> VARIABLE .)
+    COMMA           reduce using rule 12 (dato -> VARIABLE .)
+    RCBRACKET       reduce using rule 12 (dato -> VARIABLE .)
+    COLON           reduce using rule 12 (dato -> VARIABLE .)
+
+
+state 25
+
+    (20) array -> VAR VARIABLE . EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
+
+    EQUALS          shift and go to state 38
+
+
+state 26
+
+    (8) impresion -> PRINT LPAREN dato . RPAREN
+
+    RPAREN          shift and go to state 39
+
+
 state 27
 
-    (12) mapa -> VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA . LCBRACKET adentro RCBRACKET
+    (13) for -> FOR VARIABLE FASTDEC . INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
 
-    LCBRACKET       shift and go to state 33
+    INT             shift and go to state 40
 
 
 state 28
 
-    (7) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion . INT PUNTO_COMA MAS MAS LCBRACKET
+    (14) for2 -> FOR VARIABLE sigcomparacion . INT LCBRACKET
 
-    INT             shift and go to state 34
+    INT             shift and go to state 41
 
 
 state 29
 
-    (8) sigcomparacion -> MENORQUE .
+    (16) sigcomparacion -> MENORQUE .
 
-    INT             reduce using rule 8 (sigcomparacion -> MENORQUE .)
+    INT             reduce using rule 16 (sigcomparacion -> MENORQUE .)
+    STRING          reduce using rule 16 (sigcomparacion -> MENORQUE .)
+    FLOAT           reduce using rule 16 (sigcomparacion -> MENORQUE .)
+    VARIABLE        reduce using rule 16 (sigcomparacion -> MENORQUE .)
 
 
 state 30
 
-    (9) sigcomparacion -> MAYORQUE .
+    (17) sigcomparacion -> MAYORQUE .
 
-    INT             reduce using rule 9 (sigcomparacion -> MAYORQUE .)
+    INT             reduce using rule 17 (sigcomparacion -> MAYORQUE .)
+    STRING          reduce using rule 17 (sigcomparacion -> MAYORQUE .)
+    FLOAT           reduce using rule 17 (sigcomparacion -> MAYORQUE .)
+    VARIABLE        reduce using rule 17 (sigcomparacion -> MAYORQUE .)
 
 
 state 31
 
-    (10) sigcomparacion -> DIFERENTE .
+    (18) sigcomparacion -> DIFERENTE .
 
-    INT             reduce using rule 10 (sigcomparacion -> DIFERENTE .)
+    INT             reduce using rule 18 (sigcomparacion -> DIFERENTE .)
+    STRING          reduce using rule 18 (sigcomparacion -> DIFERENTE .)
+    FLOAT           reduce using rule 18 (sigcomparacion -> DIFERENTE .)
+    VARIABLE        reduce using rule 18 (sigcomparacion -> DIFERENTE .)
 
 
 state 32
 
-    (11) sigcomparacion -> COMPARA_IGUAL .
+    (19) sigcomparacion -> COMPARA_IGUAL .
 
-    INT             reduce using rule 11 (sigcomparacion -> COMPARA_IGUAL .)
+    INT             reduce using rule 19 (sigcomparacion -> COMPARA_IGUAL .)
+    STRING          reduce using rule 19 (sigcomparacion -> COMPARA_IGUAL .)
+    FLOAT           reduce using rule 19 (sigcomparacion -> COMPARA_IGUAL .)
+    VARIABLE        reduce using rule 19 (sigcomparacion -> COMPARA_IGUAL .)
 
 
 state 33
 
-    (12) mapa -> VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET . adentro RCBRACKET
-    (15) adentro -> . dato
-    (16) adentro -> . dato adentro
-    (19) dato -> . tipo COLON tipo
-    (17) tipo -> . INT
-    (18) tipo -> . STRING
+    (15) for3 -> FOR LCBRACKET instrucciones . RCBRACKET
 
-    INT             shift and go to state 38
-    STRING          shift and go to state 39
+    RCBRACKET       shift and go to state 42
 
-    adentro                        shift and go to state 35
-    dato                           shift and go to state 36
-    tipo                           shift and go to state 37
 
 state 34
 
-    (7) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT . PUNTO_COMA MAS MAS LCBRACKET
+    (24) mapa -> VARIABLE EQUALS MAP . LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
 
-    PUNTO_COMA      shift and go to state 40
+    LBRACKET        shift and go to state 43
 
 
 state 35
 
-    (12) mapa -> VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro . RCBRACKET
+    (21) array -> VARIABLE FASTDEC LBRACKET . INT TDATO LCBRACKET elementArray RCBRACKET
 
-    RCBRACKET       shift and go to state 41
+    INT             shift and go to state 44
 
 
 state 36
 
-    (15) adentro -> dato .
-    (16) adentro -> dato . adentro
-    (15) adentro -> . dato
-    (16) adentro -> . dato adentro
-    (19) dato -> . tipo COLON tipo
-    (17) tipo -> . INT
-    (18) tipo -> . STRING
+    (31) si -> IF comparacion LCBRACKET . instrucciones RCBRACKET
+    (1) instrucciones -> . impresion
+    (2) instrucciones -> . for
+    (3) instrucciones -> . for2
+    (4) instrucciones -> . for3
+    (5) instrucciones -> . mapa
+    (6) instrucciones -> . si
+    (7) instrucciones -> . array
+    (8) impresion -> . PRINT LPAREN dato RPAREN
+    (13) for -> . FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+    (14) for2 -> . FOR VARIABLE sigcomparacion INT LCBRACKET
+    (15) for3 -> . FOR LCBRACKET instrucciones RCBRACKET
+    (24) mapa -> . VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
+    (31) si -> . IF comparacion LCBRACKET instrucciones RCBRACKET
+    (20) array -> . VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
+    (21) array -> . VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET
 
-    RCBRACKET       reduce using rule 15 (adentro -> dato .)
-    INT             shift and go to state 38
-    STRING          shift and go to state 39
+    PRINT           shift and go to state 9
+    FOR             shift and go to state 10
+    VARIABLE        shift and go to state 11
+    IF              shift and go to state 12
+    VAR             shift and go to state 13
 
-    dato                           shift and go to state 36
-    adentro                        shift and go to state 42
-    tipo                           shift and go to state 37
+    instrucciones                  shift and go to state 45
+    impresion                      shift and go to state 2
+    for                            shift and go to state 3
+    for2                           shift and go to state 4
+    for3                           shift and go to state 5
+    mapa                           shift and go to state 6
+    si                             shift and go to state 7
+    array                          shift and go to state 8
 
 state 37
 
-    (19) dato -> tipo . COLON tipo
+    (32) comparacion -> dato sigcomparacion . dato
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
 
-    COLON           shift and go to state 43
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
 
+    dato                           shift and go to state 46
 
 state 38
 
-    (17) tipo -> INT .
+    (20) array -> VAR VARIABLE EQUALS . LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
 
-    COLON           reduce using rule 17 (tipo -> INT .)
-    INT             reduce using rule 17 (tipo -> INT .)
-    STRING          reduce using rule 17 (tipo -> INT .)
-    RCBRACKET       reduce using rule 17 (tipo -> INT .)
+    LBRACKET        shift and go to state 47
 
 
 state 39
 
-    (18) tipo -> STRING .
+    (8) impresion -> PRINT LPAREN dato RPAREN .
 
-    COLON           reduce using rule 18 (tipo -> STRING .)
-    INT             reduce using rule 18 (tipo -> STRING .)
-    STRING          reduce using rule 18 (tipo -> STRING .)
-    RCBRACKET       reduce using rule 18 (tipo -> STRING .)
+    $end            reduce using rule 8 (impresion -> PRINT LPAREN dato RPAREN .)
+    RCBRACKET       reduce using rule 8 (impresion -> PRINT LPAREN dato RPAREN .)
 
 
 state 40
 
-    (7) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA . MAS MAS LCBRACKET
+    (13) for -> FOR VARIABLE FASTDEC INT . PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
 
-    MAS             shift and go to state 44
+    PUNTO_COMA      shift and go to state 48
 
 
 state 41
 
-    (12) mapa -> VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET .
+    (14) for2 -> FOR VARIABLE sigcomparacion INT . LCBRACKET
 
-    $end            reduce using rule 12 (mapa -> VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET .)
+    LCBRACKET       shift and go to state 49
 
 
 state 42
 
-    (16) adentro -> dato adentro .
+    (15) for3 -> FOR LCBRACKET instrucciones RCBRACKET .
 
-    RCBRACKET       reduce using rule 16 (adentro -> dato adentro .)
+    $end            reduce using rule 15 (for3 -> FOR LCBRACKET instrucciones RCBRACKET .)
+    RCBRACKET       reduce using rule 15 (for3 -> FOR LCBRACKET instrucciones RCBRACKET .)
 
 
 state 43
 
-    (19) dato -> tipo COLON . tipo
-    (17) tipo -> . INT
-    (18) tipo -> . STRING
+    (24) mapa -> VARIABLE EQUALS MAP LBRACKET . TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
+    (25) TDATO -> . TSTRING
+    (26) TDATO -> . TINT
+    (27) TDATO -> . TFLOAT
 
-    INT             shift and go to state 38
-    STRING          shift and go to state 39
+    TSTRING         shift and go to state 51
+    TINT            shift and go to state 52
+    TFLOAT          shift and go to state 53
 
-    tipo                           shift and go to state 45
+    TDATO                          shift and go to state 50
 
 state 44
 
-    (7) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS . MAS LCBRACKET
+    (21) array -> VARIABLE FASTDEC LBRACKET INT . TDATO LCBRACKET elementArray RCBRACKET
+    (25) TDATO -> . TSTRING
+    (26) TDATO -> . TINT
+    (27) TDATO -> . TFLOAT
 
-    MAS             shift and go to state 46
+    TSTRING         shift and go to state 51
+    TINT            shift and go to state 52
+    TFLOAT          shift and go to state 53
 
+    TDATO                          shift and go to state 54
 
 state 45
 
-    (19) dato -> tipo COLON tipo .
+    (31) si -> IF comparacion LCBRACKET instrucciones . RCBRACKET
 
-    INT             reduce using rule 19 (dato -> tipo COLON tipo .)
-    STRING          reduce using rule 19 (dato -> tipo COLON tipo .)
-    RCBRACKET       reduce using rule 19 (dato -> tipo COLON tipo .)
+    RCBRACKET       shift and go to state 55
 
 
 state 46
 
-    (7) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS . LCBRACKET
+    (32) comparacion -> dato sigcomparacion dato .
 
-    LCBRACKET       shift and go to state 47
+    LCBRACKET       reduce using rule 32 (comparacion -> dato sigcomparacion dato .)
 
 
 state 47
 
-    (7) for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET .
+    (20) array -> VAR VARIABLE EQUALS LBRACKET . INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
 
-    $end            reduce using rule 7 (for -> FOR VARIABLE COLON EQUALS INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA MAS MAS LCBRACKET .)
+    INT             shift and go to state 56
+
+
+state 48
+
+    (13) for -> FOR VARIABLE FASTDEC INT PUNTO_COMA . VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+
+    VARIABLE        shift and go to state 57
+
+
+state 49
+
+    (14) for2 -> FOR VARIABLE sigcomparacion INT LCBRACKET .
+
+    $end            reduce using rule 14 (for2 -> FOR VARIABLE sigcomparacion INT LCBRACKET .)
+    RCBRACKET       reduce using rule 14 (for2 -> FOR VARIABLE sigcomparacion INT LCBRACKET .)
+
+
+state 50
+
+    (24) mapa -> VARIABLE EQUALS MAP LBRACKET TDATO . RBRACKET TDATO LCBRACKET adentro RCBRACKET
+
+    RBRACKET        shift and go to state 58
+
+
+state 51
+
+    (25) TDATO -> TSTRING .
+
+    RBRACKET        reduce using rule 25 (TDATO -> TSTRING .)
+    LCBRACKET       reduce using rule 25 (TDATO -> TSTRING .)
+
+
+state 52
+
+    (26) TDATO -> TINT .
+
+    RBRACKET        reduce using rule 26 (TDATO -> TINT .)
+    LCBRACKET       reduce using rule 26 (TDATO -> TINT .)
+
+
+state 53
+
+    (27) TDATO -> TFLOAT .
+
+    RBRACKET        reduce using rule 27 (TDATO -> TFLOAT .)
+    LCBRACKET       reduce using rule 27 (TDATO -> TFLOAT .)
+
+
+state 54
+
+    (21) array -> VARIABLE FASTDEC LBRACKET INT TDATO . LCBRACKET elementArray RCBRACKET
+
+    LCBRACKET       shift and go to state 59
+
+
+state 55
+
+    (31) si -> IF comparacion LCBRACKET instrucciones RCBRACKET .
+
+    $end            reduce using rule 31 (si -> IF comparacion LCBRACKET instrucciones RCBRACKET .)
+    RCBRACKET       reduce using rule 31 (si -> IF comparacion LCBRACKET instrucciones RCBRACKET .)
+
+
+state 56
+
+    (20) array -> VAR VARIABLE EQUALS LBRACKET INT . RBRACKET TDATO LCBRACKET elementArray RCBRACKET
+
+    RBRACKET        shift and go to state 60
+
+
+state 57
+
+    (13) for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE . sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+    (16) sigcomparacion -> . MENORQUE
+    (17) sigcomparacion -> . MAYORQUE
+    (18) sigcomparacion -> . DIFERENTE
+    (19) sigcomparacion -> . COMPARA_IGUAL
+
+    MENORQUE        shift and go to state 29
+    MAYORQUE        shift and go to state 30
+    DIFERENTE       shift and go to state 31
+    COMPARA_IGUAL   shift and go to state 32
+
+    sigcomparacion                 shift and go to state 61
+
+state 58
+
+    (24) mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET . TDATO LCBRACKET adentro RCBRACKET
+    (25) TDATO -> . TSTRING
+    (26) TDATO -> . TINT
+    (27) TDATO -> . TFLOAT
+
+    TSTRING         shift and go to state 51
+    TINT            shift and go to state 52
+    TFLOAT          shift and go to state 53
+
+    TDATO                          shift and go to state 62
+
+state 59
+
+    (21) array -> VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET . elementArray RCBRACKET
+    (22) elementArray -> . dato
+    (23) elementArray -> . dato COMMA elementArray
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
+
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
+
+    elementArray                   shift and go to state 63
+    dato                           shift and go to state 64
+
+state 60
+
+    (20) array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET . TDATO LCBRACKET elementArray RCBRACKET
+    (25) TDATO -> . TSTRING
+    (26) TDATO -> . TINT
+    (27) TDATO -> . TFLOAT
+
+    TSTRING         shift and go to state 51
+    TINT            shift and go to state 52
+    TFLOAT          shift and go to state 53
+
+    TDATO                          shift and go to state 65
+
+state 61
+
+    (13) for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion . INT PUNTO_COMA VARIABLE MASMAS LCBRACKET
+
+    INT             shift and go to state 66
+
+
+state 62
+
+    (24) mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO . LCBRACKET adentro RCBRACKET
+
+    LCBRACKET       shift and go to state 67
+
+
+state 63
+
+    (21) array -> VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray . RCBRACKET
+
+    RCBRACKET       shift and go to state 68
+
+
+state 64
+
+    (22) elementArray -> dato .
+    (23) elementArray -> dato . COMMA elementArray
+
+    RCBRACKET       reduce using rule 22 (elementArray -> dato .)
+    COMMA           shift and go to state 69
+
+
+state 65
+
+    (20) array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO . LCBRACKET elementArray RCBRACKET
+
+    LCBRACKET       shift and go to state 70
+
+
+state 66
+
+    (13) for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT . PUNTO_COMA VARIABLE MASMAS LCBRACKET
+
+    PUNTO_COMA      shift and go to state 71
+
+
+state 67
+
+    (24) mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET . adentro RCBRACKET
+    (28) adentro -> . definicion
+    (29) adentro -> . definicion COMMA adentro
+    (30) definicion -> . dato COLON dato
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
+
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
+
+    adentro                        shift and go to state 72
+    definicion                     shift and go to state 73
+    dato                           shift and go to state 74
+
+state 68
+
+    (21) array -> VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET .
+
+    $end            reduce using rule 21 (array -> VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET .)
+    RCBRACKET       reduce using rule 21 (array -> VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET .)
+
+
+state 69
+
+    (23) elementArray -> dato COMMA . elementArray
+    (22) elementArray -> . dato
+    (23) elementArray -> . dato COMMA elementArray
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
+
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
+
+    dato                           shift and go to state 64
+    elementArray                   shift and go to state 75
+
+state 70
+
+    (20) array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET . elementArray RCBRACKET
+    (22) elementArray -> . dato
+    (23) elementArray -> . dato COMMA elementArray
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
+
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
+
+    elementArray                   shift and go to state 76
+    dato                           shift and go to state 64
+
+state 71
+
+    (13) for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA . VARIABLE MASMAS LCBRACKET
+
+    VARIABLE        shift and go to state 77
+
+
+state 72
+
+    (24) mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro . RCBRACKET
+
+    RCBRACKET       shift and go to state 78
+
+
+state 73
+
+    (28) adentro -> definicion .
+    (29) adentro -> definicion . COMMA adentro
+
+    RCBRACKET       reduce using rule 28 (adentro -> definicion .)
+    COMMA           shift and go to state 79
+
+
+state 74
+
+    (30) definicion -> dato . COLON dato
+
+    COLON           shift and go to state 80
+
+
+state 75
+
+    (23) elementArray -> dato COMMA elementArray .
+
+    RCBRACKET       reduce using rule 23 (elementArray -> dato COMMA elementArray .)
+
+
+state 76
+
+    (20) array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray . RCBRACKET
+
+    RCBRACKET       shift and go to state 81
+
+
+state 77
+
+    (13) for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE . MASMAS LCBRACKET
+
+    MASMAS          shift and go to state 82
+
+
+state 78
+
+    (24) mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET .
+
+    $end            reduce using rule 24 (mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET .)
+    RCBRACKET       reduce using rule 24 (mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET .)
+
+
+state 79
+
+    (29) adentro -> definicion COMMA . adentro
+    (28) adentro -> . definicion
+    (29) adentro -> . definicion COMMA adentro
+    (30) definicion -> . dato COLON dato
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
+
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
+
+    definicion                     shift and go to state 73
+    adentro                        shift and go to state 83
+    dato                           shift and go to state 74
+
+state 80
+
+    (30) definicion -> dato COLON . dato
+    (9) dato -> . INT
+    (10) dato -> . STRING
+    (11) dato -> . FLOAT
+    (12) dato -> . VARIABLE
+
+    INT             shift and go to state 21
+    STRING          shift and go to state 22
+    FLOAT           shift and go to state 23
+    VARIABLE        shift and go to state 24
+
+    dato                           shift and go to state 84
+
+state 81
+
+    (20) array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET .
+
+    $end            reduce using rule 20 (array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET .)
+    RCBRACKET       reduce using rule 20 (array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET .)
+
+
+state 82
+
+    (13) for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS . LCBRACKET
+
+    LCBRACKET       shift and go to state 85
+
+
+state 83
+
+    (29) adentro -> definicion COMMA adentro .
+
+    RCBRACKET       reduce using rule 29 (adentro -> definicion COMMA adentro .)
+
+
+state 84
+
+    (30) definicion -> dato COLON dato .
+
+    COMMA           reduce using rule 30 (definicion -> dato COLON dato .)
+    RCBRACKET       reduce using rule 30 (definicion -> dato COLON dato .)
+
+
+state 85
+
+    (13) for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET .
+
+    $end            reduce using rule 13 (for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET .)
+    RCBRACKET       reduce using rule 13 (for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET .)
 

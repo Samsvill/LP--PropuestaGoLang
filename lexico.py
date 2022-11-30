@@ -25,6 +25,7 @@ reserved = {
   'chan' : 'CHAN',
   'goto' : 'GOTO',
   'const' : 'CONST',
+  'range' : 'RANGE',
   'fallthrough' : 'FALLTHROUGH',
   'type' : 'TYPE',
   'var' : 'VAR',
@@ -140,17 +141,17 @@ nameAgeMap = map[string]int{
 """
 
 #Agregar mi algoritmo que pruebe todos los tokens
-lexer.input(Sam_instruc)
-getTokens(lexer)
-
-# FIN PROBAR -------SAM----------------
-
-# SEGUIR LEYENDO
-linea=" "
-while linea!="":
-    linea=input(">>")
-    lexer.input(linea)
-    getTokens(lexer)
-# Tokenize
-print("Succesfull")
+#lexer.input(Sam_instruc)
+#getTokens(lexer)
+#
+## FIN PROBAR -------SAM----------------
+#
+## SEGUIR LEYENDO
+#linea=" "
+#while linea!="":
+#    linea=input(">>")
+#    lexer.input(linea)
+#    getTokens(lexer)
+## Tokenize
+#print("Succesfull")
 

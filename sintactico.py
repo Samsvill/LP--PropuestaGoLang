@@ -15,6 +15,7 @@ def p_instrucciones(p): #REGLA PADRE !!!
                       | funcion
                       | concatDatos
                       | ArraySemantica
+                      | switchh
                       '''
 
 #---------------------------IMPRESION DE DATOS----------------------------------------
@@ -75,8 +76,7 @@ def p_nombreFuncion(p):
 def p_parametrosfuncion(p):
   '''parametrosF : VARIABLE TDATA
                 | VARIABLE TDATA COMMA parametrosF'''
-def p_variablesRetorno(p):
-  '''varRetornoF : '''
+
 
 
 
@@ -98,13 +98,12 @@ def p_definicion(p):
   '''
 #----------------------------FIN - SAM - MAPA -----------------------
 
-#---------------------------- IF - SAM ------------------------------
+#---------------------------- IF - SAM (ESTRUCTURA DE CONTROL) ------------------------------
 def p_if(p):
   "si : IF comparacion LCBRACKET instrucciones RCBRACKET"
 def p_bloquecomparacion(p):
   "comparacion : dato sigcomparacion dato"
 #------------------------- FIN - IF - SAM ---------------------------
-
 #------------------------REGLAS SEMANTICAS--------------------------
 #--------------------------- YANALEEN ------------------------------
 #El operador + no puede usarse entre dos tipos de datos diferentes
@@ -124,6 +123,20 @@ def p_ElementstringA(p):
 def p_ElementIntA(p):
   '''elementIntS : INT
                    | INT COMMA elementIntS '''
+
+
+#-------------------------- SWITCH (ESTRUCTURA DE CONTROL) ------------------------
+
+def p_switch(p):
+  '''switchh : SWITCH VARIABLE LCBRACKET cases def RCBRACKET'''
+def p_cases(p):
+  '''cases : case1 
+  | case1  cases'''
+def p_case(p):
+  '''case1 : CASE INT COLON instrucciones'''
+def p_def(p):
+  '''def : DEFAULT COMMA instrucciones'''
+#-------------------------- FIN SWITCH (ESTRUCTURA DE CONTROL) ----------------------
 
  # ERRORES DE SINTAXIS
 def p_error(p):

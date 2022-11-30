@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BREAK CASE CHAN COLON COMMA COMPARA_IGUAL CONST CONTINUE DEFAULT DEFER DIFERENTE DIV DQMARK ELSE EQUALS FALLTHROUGH FASTDEC FLOAT FOR FUNC GO GOTO IF IMPORT INCREMENT INT INTERFACE LBRACKET LCBRACKET LPAREN MAP MAS MASMAS MAYORQUE MENORQUE MENOS MUL PRINT PRINTLN PUNTO_COMA RBRACKET RCBRACKET RETURN RPAREN SELECT STRING STRUCT SWITCH TFLOAT TINT TSTRING TYPE VAR VARIABLEinstrucciones : impresion\n                      | for\n                      | for2\n                      | for3\n                      | mapa\n                      | si\n                      | array\n                      impresion : PRINT LPAREN dato RPARENdato : INT \n  | STRING\n  | FLOAT\n  | VARIABLEfor : FOR VARIABLE FASTDEC  INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA VARIABLE MASMAS LCBRACKET for2 : FOR VARIABLE sigcomparacion INT LCBRACKETfor3 : FOR LCBRACKET instrucciones RCBRACKETsigcomparacion : MENORQUE\n                     | MAYORQUE\n                     | DIFERENTE\n                     | COMPARA_IGUALarray : VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET\n            | VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKETelementArray : dato\n                   | dato COMMA elementArray mapa : VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET\n  TDATO : TSTRING \n  | TINT\n  | TFLOAT\n  adentro : definicion \n  | definicion COMMA adentro\n   definicion : dato COLON dato\n  si : IF comparacion LCBRACKET instrucciones RCBRACKETcomparacion : dato sigcomparacion dato'
+_lr_signature = 'BREAK CASE CHAN COLON COMMA COMPARA_IGUAL CONST CONTINUE DEFAULT DEFER DIFERENTE DIV DQMARK ELSE EQUALS FALLTHROUGH FASTDEC FLOAT FOR FUNC GO GOTO IF IMPORT INCREMENT INT INTERFACE LBRACKET LCBRACKET LPAREN MAP MAS MASMAS MAYORQUE MENORQUE MENOS MUL PRINT PRINTLN PUNTO_COMA RANGE RBRACKET RCBRACKET RETURN RPAREN SELECT STRING STRUCT SWITCH TFLOAT TINT TSTRING TYPE VAR VARIABLEinstrucciones : impresion\n                      | for\n                      | for2\n                      | for3\n                      | mapa\n                      | si\n                      | array\n                      | switchh\n                      impresion : PRINT LPAREN dato RPARENdato : INT \n  | STRING\n  | FLOAT\n  | VARIABLEfor : FOR VARIABLE FASTDEC  INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA VARIABLE MASMAS LCBRACKET for2 : FOR VARIABLE sigcomparacion INT LCBRACKETfor3 : FOR LCBRACKET instrucciones RCBRACKETsigcomparacion : MENORQUE\n                     | MAYORQUE\n                     | DIFERENTE\n                     | COMPARA_IGUALarray : VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET\n            | VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKETelementArray : dato\n                   | dato COMMA elementArray mapa : VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET\n  TDATO : TSTRING \n  | TINT\n  | TFLOAT\n  adentro : definicion \n  | definicion COMMA adentro\n   definicion : dato COLON dato\n  si : IF comparacion LCBRACKET instrucciones RCBRACKETcomparacion : dato sigcomparacion datoswitchh : SWITCH VARIABLE LCBRACKET cases def RCBRACKETcases : case1 \n  | case1  casescase1 : CASE INT COLON instruccionesdef : DEFAULT COMMA instrucciones'
     
-_lr_action_items = {'PRINT':([0,16,36,],[9,9,9,]),'FOR':([0,16,36,],[10,10,10,]),'VARIABLE':([0,10,12,13,14,16,29,30,31,32,36,37,48,59,67,69,70,71,79,80,],[11,15,24,25,24,11,-16,-17,-18,-19,11,24,57,24,24,24,24,77,24,24,]),'IF':([0,16,36,],[12,12,12,]),'VAR':([0,16,36,],[13,13,13,]),'$end':([1,2,3,4,5,6,7,8,39,42,49,55,68,78,81,85,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-15,-14,-31,-21,-24,-20,-13,]),'RCBRACKET':([2,3,4,5,6,7,8,21,22,23,24,33,39,42,45,49,55,63,64,68,72,73,75,76,78,81,83,84,85,],[-1,-2,-3,-4,-5,-6,-7,-9,-10,-11,-12,42,-8,-15,55,-14,-31,68,-22,-21,78,-28,-23,81,-24,-20,-29,-30,-13,]),'LPAREN':([9,],[14,]),'LCBRACKET':([10,19,21,22,23,24,41,46,51,52,53,54,62,65,82,],[16,36,-9,-10,-11,-12,49,-32,-25,-26,-27,59,67,70,85,]),'EQUALS':([11,25,],[17,38,]),'FASTDEC':([11,15,],[18,27,]),'INT':([12,14,27,28,29,30,31,32,35,37,47,59,61,67,69,70,79,80,],[21,21,40,41,-16,-17,-18,-19,44,21,56,21,66,21,21,21,21,21,]),'STRING':([12,14,29,30,31,32,37,59,67,69,70,79,80,],[22,22,-16,-17,-18,-19,22,22,22,22,22,22,22,]),'FLOAT':([12,14,29,30,31,32,37,59,67,69,70,79,80,],[23,23,-16,-17,-18,-19,23,23,23,23,23,23,23,]),'MENORQUE':([15,20,21,22,23,24,57,],[29,29,-9,-10,-11,-12,29,]),'MAYORQUE':([15,20,21,22,23,24,57,],[30,30,-9,-10,-11,-12,30,]),'DIFERENTE':([15,20,21,22,23,24,57,],[31,31,-9,-10,-11,-12,31,]),'COMPARA_IGUAL':([15,20,21,22,23,24,57,],[32,32,-9,-10,-11,-12,32,]),'MAP':([17,],[34,]),'LBRACKET':([18,34,38,],[35,43,47,]),'RPAREN':([21,22,23,24,26,],[-9,-10,-11,-12,39,]),'COMMA':([21,22,23,24,64,73,84,],[-9,-10,-11,-12,69,79,-30,]),'COLON':([21,22,23,24,74,],[-9,-10,-11,-12,80,]),'PUNTO_COMA':([40,66,],[48,71,]),'TSTRING':([43,44,58,60,],[51,51,51,51,]),'TINT':([43,44,58,60,],[52,52,52,52,]),'TFLOAT':([43,44,58,60,],[53,53,53,53,]),'RBRACKET':([50,51,52,53,56,],[58,-25,-26,-27,60,]),'MASMAS':([77,],[82,]),}
+_lr_action_items = {'PRINT':([0,18,39,73,74,],[10,10,10,10,10,]),'FOR':([0,18,39,73,74,],[11,11,11,11,11,]),'VARIABLE':([0,11,13,14,15,16,18,32,33,34,35,39,40,55,70,73,74,83,85,86,87,95,96,],[12,17,26,27,28,26,12,-17,-18,-19,-20,12,26,68,26,12,12,26,26,26,93,26,26,]),'IF':([0,18,39,73,74,],[13,13,13,13,13,]),'VAR':([0,18,39,73,74,],[14,14,14,14,14,]),'SWITCH':([0,18,39,73,74,],[15,15,15,15,15,]),'$end':([1,2,3,4,5,6,7,8,9,43,46,56,62,72,84,94,97,101,],[0,-1,-2,-3,-4,-5,-6,-7,-8,-9,-16,-15,-32,-34,-22,-25,-21,-14,]),'RCBRACKET':([2,3,4,5,6,7,8,9,23,24,25,26,36,43,46,49,56,62,64,72,77,78,80,84,88,89,91,92,94,97,99,100,101,],[-1,-2,-3,-4,-5,-6,-7,-8,-10,-11,-12,-13,46,-9,-16,62,-15,-32,72,-34,84,-23,-38,-22,94,-29,-24,97,-25,-21,-30,-31,-14,]),'CASE':([2,3,4,5,6,7,8,9,42,43,46,53,56,62,72,81,84,94,97,101,],[-1,-2,-3,-4,-5,-6,-7,-8,54,-9,-16,54,-15,-32,-34,-37,-22,-25,-21,-14,]),'DEFAULT':([2,3,4,5,6,7,8,9,43,46,52,53,56,62,66,72,81,84,94,97,101,],[-1,-2,-3,-4,-5,-6,-7,-8,-9,-16,65,-35,-15,-32,-36,-34,-37,-22,-25,-21,-14,]),'LPAREN':([10,],[16,]),'LCBRACKET':([11,21,23,24,25,26,28,45,50,58,59,60,61,76,79,98,],[18,39,-10,-11,-12,-13,42,56,-33,-26,-27,-28,70,83,86,101,]),'EQUALS':([12,27,],[19,41,]),'FASTDEC':([12,17,],[20,30,]),'INT':([13,16,30,31,32,33,34,35,38,40,51,54,70,75,83,85,86,95,96,],[23,23,44,45,-17,-18,-19,-20,48,23,63,67,23,82,23,23,23,23,23,]),'STRING':([13,16,32,33,34,35,40,70,83,85,86,95,96,],[24,24,-17,-18,-19,-20,24,24,24,24,24,24,24,]),'FLOAT':([13,16,32,33,34,35,40,70,83,85,86,95,96,],[25,25,-17,-18,-19,-20,25,25,25,25,25,25,25,]),'MENORQUE':([17,22,23,24,25,26,68,],[32,32,-10,-11,-12,-13,32,]),'MAYORQUE':([17,22,23,24,25,26,68,],[33,33,-10,-11,-12,-13,33,]),'DIFERENTE':([17,22,23,24,25,26,68,],[34,34,-10,-11,-12,-13,34,]),'COMPARA_IGUAL':([17,22,23,24,25,26,68,],[35,35,-10,-11,-12,-13,35,]),'MAP':([19,],[37,]),'LBRACKET':([20,37,41,],[38,47,51,]),'RPAREN':([23,24,25,26,29,],[-10,-11,-12,-13,43,]),'COMMA':([23,24,25,26,65,78,89,100,],[-10,-11,-12,-13,73,85,95,-31,]),'COLON':([23,24,25,26,67,90,],[-10,-11,-12,-13,74,96,]),'PUNTO_COMA':([44,82,],[55,87,]),'TSTRING':([47,48,69,71,],[58,58,58,58,]),'TINT':([47,48,69,71,],[59,59,59,59,]),'TFLOAT':([47,48,69,71,],[60,60,60,60,]),'RBRACKET':([57,58,59,60,63,],[69,-26,-27,-28,71,]),'MASMAS':([93,],[98,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'instrucciones':([0,16,36,],[1,33,45,]),'impresion':([0,16,36,],[2,2,2,]),'for':([0,16,36,],[3,3,3,]),'for2':([0,16,36,],[4,4,4,]),'for3':([0,16,36,],[5,5,5,]),'mapa':([0,16,36,],[6,6,6,]),'si':([0,16,36,],[7,7,7,]),'array':([0,16,36,],[8,8,8,]),'comparacion':([12,],[19,]),'dato':([12,14,37,59,67,69,70,79,80,],[20,26,46,64,74,64,64,74,84,]),'sigcomparacion':([15,20,57,],[28,37,61,]),'TDATO':([43,44,58,60,],[50,54,62,65,]),'elementArray':([59,69,70,],[63,75,76,]),'adentro':([67,79,],[72,83,]),'definicion':([67,79,],[73,73,]),}
+_lr_goto_items = {'instrucciones':([0,18,39,73,74,],[1,36,49,80,81,]),'impresion':([0,18,39,73,74,],[2,2,2,2,2,]),'for':([0,18,39,73,74,],[3,3,3,3,3,]),'for2':([0,18,39,73,74,],[4,4,4,4,4,]),'for3':([0,18,39,73,74,],[5,5,5,5,5,]),'mapa':([0,18,39,73,74,],[6,6,6,6,6,]),'si':([0,18,39,73,74,],[7,7,7,7,7,]),'array':([0,18,39,73,74,],[8,8,8,8,8,]),'switchh':([0,18,39,73,74,],[9,9,9,9,9,]),'comparacion':([13,],[21,]),'dato':([13,16,40,70,83,85,86,95,96,],[22,29,50,78,90,78,78,90,100,]),'sigcomparacion':([17,22,68,],[31,40,75,]),'cases':([42,53,],[52,66,]),'case1':([42,53,],[53,53,]),'TDATO':([47,48,69,71,],[57,61,76,79,]),'def':([52,],[64,]),'elementArray':([70,85,86,],[77,91,92,]),'adentro':([83,95,],[88,99,]),'definicion':([83,95,],[89,89,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -34,29 +34,35 @@ _lr_productions = [
   ('instrucciones -> mapa','instrucciones',1,'p_instrucciones','sintactico.py',12),
   ('instrucciones -> si','instrucciones',1,'p_instrucciones','sintactico.py',13),
   ('instrucciones -> array','instrucciones',1,'p_instrucciones','sintactico.py',14),
-  ('impresion -> PRINT LPAREN dato RPAREN','impresion',4,'p_impresion','sintactico.py',19),
-  ('dato -> INT','dato',1,'p_dato','sintactico.py',22),
-  ('dato -> STRING','dato',1,'p_dato','sintactico.py',23),
-  ('dato -> FLOAT','dato',1,'p_dato','sintactico.py',24),
-  ('dato -> VARIABLE','dato',1,'p_dato','sintactico.py',25),
-  ('for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET','for',12,'p_for','sintactico.py',31),
-  ('for2 -> FOR VARIABLE sigcomparacion INT LCBRACKET','for2',5,'p_for2','sintactico.py',35),
-  ('for3 -> FOR LCBRACKET instrucciones RCBRACKET','for3',4,'p_for3','sintactico.py',39),
-  ('sigcomparacion -> MENORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',43),
-  ('sigcomparacion -> MAYORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',44),
-  ('sigcomparacion -> DIFERENTE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',45),
-  ('sigcomparacion -> COMPARA_IGUAL','sigcomparacion',1,'p_signoscomparacion','sintactico.py',46),
-  ('array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET','array',10,'p_array','sintactico.py',55),
-  ('array -> VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET','array',8,'p_array','sintactico.py',56),
-  ('elementArray -> dato','elementArray',1,'p_elementArray','sintactico.py',59),
-  ('elementArray -> dato COMMA elementArray','elementArray',3,'p_elementArray','sintactico.py',60),
-  ('mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET','mapa',10,'p_mapa','sintactico.py',66),
-  ('TDATO -> TSTRING','TDATO',1,'p_dataTokensAvailable','sintactico.py',69),
-  ('TDATO -> TINT','TDATO',1,'p_dataTokensAvailable','sintactico.py',70),
-  ('TDATO -> TFLOAT','TDATO',1,'p_dataTokensAvailable','sintactico.py',71),
-  ('adentro -> definicion','adentro',1,'p_adentro','sintactico.py',74),
-  ('adentro -> definicion COMMA adentro','adentro',3,'p_adentro','sintactico.py',75),
-  ('definicion -> dato COLON dato','definicion',3,'p_definicion','sintactico.py',78),
-  ('si -> IF comparacion LCBRACKET instrucciones RCBRACKET','si',5,'p_if','sintactico.py',84),
+  ('instrucciones -> switchh','instrucciones',1,'p_instrucciones','sintactico.py',15),
+  ('impresion -> PRINT LPAREN dato RPAREN','impresion',4,'p_impresion','sintactico.py',20),
+  ('dato -> INT','dato',1,'p_dato','sintactico.py',23),
+  ('dato -> STRING','dato',1,'p_dato','sintactico.py',24),
+  ('dato -> FLOAT','dato',1,'p_dato','sintactico.py',25),
+  ('dato -> VARIABLE','dato',1,'p_dato','sintactico.py',26),
+  ('for -> FOR VARIABLE FASTDEC INT PUNTO_COMA VARIABLE sigcomparacion INT PUNTO_COMA VARIABLE MASMAS LCBRACKET','for',12,'p_for','sintactico.py',32),
+  ('for2 -> FOR VARIABLE sigcomparacion INT LCBRACKET','for2',5,'p_for2','sintactico.py',36),
+  ('for3 -> FOR LCBRACKET instrucciones RCBRACKET','for3',4,'p_for3','sintactico.py',40),
+  ('sigcomparacion -> MENORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',44),
+  ('sigcomparacion -> MAYORQUE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',45),
+  ('sigcomparacion -> DIFERENTE','sigcomparacion',1,'p_signoscomparacion','sintactico.py',46),
+  ('sigcomparacion -> COMPARA_IGUAL','sigcomparacion',1,'p_signoscomparacion','sintactico.py',47),
+  ('array -> VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET','array',10,'p_array','sintactico.py',56),
+  ('array -> VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET','array',8,'p_array','sintactico.py',57),
+  ('elementArray -> dato','elementArray',1,'p_elementArray','sintactico.py',60),
+  ('elementArray -> dato COMMA elementArray','elementArray',3,'p_elementArray','sintactico.py',61),
+  ('mapa -> VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET','mapa',10,'p_mapa','sintactico.py',67),
+  ('TDATO -> TSTRING','TDATO',1,'p_dataTokensAvailable','sintactico.py',70),
+  ('TDATO -> TINT','TDATO',1,'p_dataTokensAvailable','sintactico.py',71),
+  ('TDATO -> TFLOAT','TDATO',1,'p_dataTokensAvailable','sintactico.py',72),
+  ('adentro -> definicion','adentro',1,'p_adentro','sintactico.py',75),
+  ('adentro -> definicion COMMA adentro','adentro',3,'p_adentro','sintactico.py',76),
+  ('definicion -> dato COLON dato','definicion',3,'p_definicion','sintactico.py',79),
+  ('si -> IF comparacion LCBRACKET instrucciones RCBRACKET','si',5,'p_if','sintactico.py',85),
   ('comparacion -> dato sigcomparacion dato','comparacion',3,'p_bloquecomparacion','sintactico.py',87),
+  ('switchh -> SWITCH VARIABLE LCBRACKET cases def RCBRACKET','switchh',6,'p_switch','sintactico.py',92),
+  ('cases -> case1','cases',1,'p_cases','sintactico.py',94),
+  ('cases -> case1 cases','cases',2,'p_cases','sintactico.py',95),
+  ('case1 -> CASE INT COLON instrucciones','case1',4,'p_case','sintactico.py',97),
+  ('def -> DEFAULT COMMA instrucciones','def',3,'p_def','sintactico.py',99),
 ]

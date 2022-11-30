@@ -111,25 +111,22 @@ def p_error(p):
     print("Error de sintaxis Fin de Linea")
  
 #-----------------------BUILDER------------------------
-parser = sintactico.yacc()
 
-def validaRegla(s):
-  result = parser.parse(s)
-  print(result)
+parser = sintactico.yacc()
 #------------------Agregar al txt----------------------
   
 
 
 #proyecto lenguaje y libreria
 #------------------WHILE-------------------------------
-while True:
-  try:
-    s = input('GoLang >> ')
-  except EOFError:
-    break
-  if not s: continue
-  file = open("log.txt","a") 
-  file.write(time.strftime("\n [ %d/%m/%y -- %H:%M:%S ] ") + s )
-  print(time.strftime("\n [ %d/%m/%y -- %H:%M:%S ] ") + s)
-  file.close()
-  validaRegla(s)
+#while True:
+#  try:
+#    s = input('GoLang >> ')
+#  except EOFError:
+#    break
+#  if not s: continue
+#  file = open("log.txt","a")
+#  file.write(time.strftime("\n [ %d/%m/%y -- %H:%M:%S ] ") + s )
+#  print(time.strftime("\n [ %d/%m/%y -- %H:%M:%S ] ") + s)
+#  file.close()
+#  validaRegla(s)

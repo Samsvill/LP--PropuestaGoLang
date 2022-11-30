@@ -140,16 +140,16 @@ nameAgeMap = map[string]int{
 """
 
 #Agregar mi algoritmo que pruebe todos los tockens
-lexer.input(Sam_instruc)
-getTokens(lexer)
+#lexer.input(Sam_instruc)
+#getTokens(lexer)
 # FIN PROBAR -------SAM----------------
 
 # SEGUIR LEYENDO
-linea=" "
-while linea!="":
-    linea=input(">>")
-    lexer.input(linea)
-    getTokens(lexer)
+#linea=" "
+#while linea!="":
+#    linea=input(">>")
+#    lexer.input(linea)
+#    getTokens(lexer)
 # Tokenize
-print("Succesfull")
+#print("Succesfull")
 

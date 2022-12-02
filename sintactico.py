@@ -16,7 +16,8 @@ def p_instrucciones(p): #REGLA PADRE !!!
                       | concatDatos
                       | ArraySemantica
                       | switchh
-                      | asignaciones 
+                      | asignaciones
+                      | expresionCondicion
                       '''
 
 #---------------------------IMPRESION DE DATOS----------------------------------------
@@ -29,6 +30,10 @@ def p_dato(p):
   | STRING
   | FLOAT
   | VARIABLE'''
+
+#--------------------------------- EXPRESIONES DE CONDICIONES -----------------------------
+def p_expresionCondiciones(p):
+  '''expresionCondicion : dato sigcomparacion dato '''
 
 #-------------------------- YANA - FOR (ESTRUCTURA DE CONTROL) ------------------------
 
@@ -49,7 +54,10 @@ def p_signoscomparacion(p):
   '''sigcomparacion : MENORQUE
                      | MAYORQUE
                      | DIFERENTE
-                     | COMPARA_IGUAL'''
+                     | COMPARA_IGUAL
+                     | MAYORIGUAL
+                     | MENOR IGUAL
+                     | DIFERENTE'''
 
 
 

@@ -9,27 +9,15 @@ reserved = {
   'switch':'SWITCH',
   'return':'RETURN',
   'func':'FUNC', #YANALEENPLUAS
-  'select':'SELECT', #SAM
-  'import' : 'IMPORT',
   'case' : 'CASE',
-  'break' : 'BREAK',
   'default' : 'DEFAULT',
-  'struct' : 'STRUCT',
   'map' : 'MAP', #Sam
   'String' : 'TSTRING',
   'int' : 'TINT',#YANALEEN {
   'float' : 'TFLOAT',
-  'interface' : 'INTERFACE',
-  'defer' : 'DEFER',
-  'go' : 'GO',
-  'chan' : 'CHAN',
-  'goto' : 'GOTO',
-  'const' : 'CONST',
   'range' : 'RANGE',
   'fallthrough' : 'FALLTHROUGH',
-  'type' : 'TYPE',
   'var' : 'VAR',
-  'continue' : 'CONTINUE'#YANALEEN }
 
 
 }
@@ -58,7 +46,10 @@ tokens = [
   'COLON',
   'COMMA',
   'FASTDEC',
-  'MASMAS'
+  'MASMAS',
+  'MAYORIGUAL',
+  'MENORIGUAL',
+  'MENOSMENOS'
 ] + list(reserved.values())
 
 # TOKENS SIMPLES
@@ -83,6 +74,9 @@ t_COLON = r':'
 t_COMMA = r','
 t_STRING = r'"[a-zA-Z\w\s]*"'
 t_FASTDEC = r':='
+t_MAYORIGUAL = r'>='
+t_MENORIGUAL = r'<='
+
 
 # DEFINICION DE TOKENS
 def t_FLOAT(t):
@@ -107,6 +101,9 @@ def t_newline(t):
   r'\n+'
   t.lexer.lineno += len(t.value)
 
+def t_MENOSMENOS(t):
+  r'\-\-'
+  return t
 #def t_INCREMENT(t):
 #  r'\+{2}'
 #  return t
@@ -132,16 +129,16 @@ def getTokens(lexer):
     print(tok)
 
 # PROBAR -------SAM----------------
-Sam_instruc = """
-nameAgeMap = map[String]int{
-"James" : 50,
-"Ali" :   39,
-}
-"""
 
+#Sam_instruc = """
+#nameAgeMap = map[String]int{
+#"James" : 50,
+#"Ali" :   39,
+#}
+#"""
 #Agregar mi algoritmo que pruebe todos los tokens
-lexer.input(Sam_instruc)
-getTokens(lexer)
+#lexer.input(Sam_instruc)
+#getTokens(lexer)
 
 # FIN PROBAR -------SAM----------------
 

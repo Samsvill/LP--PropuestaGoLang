@@ -2,26 +2,17 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    BREAK
-    CHAN
-    CONST
-    CONTINUE
-    DEFER
     DIV
     DQMARK
     ELSE
     FALLTHROUGH
-    GO
-    GOTO
-    IMPORT
-    INTERFACE
+    MAYORIGUAL
+    MENORIGUAL
     MENOS
+    MENOSMENOS
     MUL
     RANGE
     RETURN
-    SELECT
-    STRUCT
-    TYPE
 
 Grammar
 
@@ -91,16 +82,11 @@ Rule 62    def -> DEFAULT COMMA instrucciones
 
 Terminals, with rules where they appear
 
-BREAK                : 
 CASE                 : 61
-CHAN                 : 
 COLON                : 41 61
 COMMA                : 29 34 40 55 57 62
 COMPARA_IGUAL        : 25
-CONST                : 
-CONTINUE             : 
 DEFAULT              : 62
-DEFER                : 
 DIFERENTE            : 24
 DIV                  : 
 DQMARK               : 
@@ -111,21 +97,20 @@ FASTDEC              : 19 27 49 53
 FLOAT                : 17
 FOR                  : 19 20 21
 FUNC                 : 30 31
-GO                   : 
-GOTO                 : 
 IF                   : 42
-IMPORT               : 
 INT                  : 15 19 19 20 26 27 51 51 52 53 56 57 61
-INTERFACE            : 
 LBRACKET             : 26 27 35 52 53
 LCBRACKET            : 19 20 21 26 27 30 31 35 42 52 53 58
 LPAREN               : 13 14 30 31
 MAP                  : 35
 MAS                  : 50 51
 MASMAS               : 19
+MAYORIGUAL           : 
 MAYORQUE             : 23
+MENORIGUAL           : 
 MENORQUE             : 22
 MENOS                : 
+MENOSMENOS           : 
 MUL                  : 
 PRINT                : 13
 PRINTLN              : 14
@@ -135,14 +120,11 @@ RBRACKET             : 26 35 52
 RCBRACKET            : 21 26 27 30 31 35 42 52 53 58
 RETURN               : 
 RPAREN               : 13 14 30 31
-SELECT               : 
 STRING               : 16 50 50 54 55
-STRUCT               : 
 SWITCH               : 58
 TFLOAT               : 38
 TINT                 : 37 53
 TSTRING              : 36 52
-TYPE                 : 
 VAR                  : 26 47 48 52
 VARIABLE             : 18 19 19 19 20 26 27 32 33 34 35 47 48 49 52 53 58
 error                : 

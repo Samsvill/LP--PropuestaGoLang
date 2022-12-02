@@ -6,7 +6,6 @@ from lexico import *
 lexer = lex.lex()
 
 
-
 def validaRegla(s):
   result = parser.parse(s)
   print(result)
@@ -23,12 +22,11 @@ def mostrarDatosLex():
 
 def mostrarDatosSintac():
     contenido= caja_codigo.get(1.0, 'end-1c')
-    print(contenido)
     result = parser.parse(contenido)
-    print(result)
-
     caja_resultados.delete('1.0','end')
+    result= str(result)
     caja_resultados.insert('1.0', result)
+
 
 
 def borrarDatos():

@@ -143,11 +143,12 @@ def getTokens(lexer):
 # FIN PROBAR -------SAM----------------
 
 # SEGUIR LEYENDO
-linea=" "
-while linea!="":
-    linea=input(">>")
-    lexer.input(linea)
-    getTokens(lexer)
-# Tokenize
-print("Succesfull")
+
+# linea=" "
+# while linea!="":
+#     linea=input(">>")
+#     lexer.input(linea)
+#     getTokens(lexer)
+# # Tokenize
+# print("Succesfull")
 

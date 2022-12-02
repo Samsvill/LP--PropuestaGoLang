@@ -76,17 +76,34 @@ def p_elementArray(p) :
 #-------------------- DECLARACION DE FUNCIONES - YANA ------------------
 #FUNCION BASICA
 def p_funciones(p):
-  '''funcion : FUNC nombreFuncion LPAREN RPAREN LCBRACKET instrucciones RCBRACKET
-              | FUNC nombreFuncion LPAREN parametrosF RPAREN LCBRACKET instrucciones RCBRACKET'''
+  '''funcion : funSimple
+              | funcPa
+              | funcRetorno
+              | funcCompleta '''
+def p_funcionSimple(p):
+  'funSimple : FUNC nombreFuncion LPAREN RPAREN LCBRACKET instrucciones RCBRACKET'
+
+def p_funcionParametros(p):
+  'funcPa : FUNC nombreFuncion LPAREN parametrosF RPAREN LCBRACKET instrucciones RCBRACKET'
+
+def p_funcRetorno(p):
+  'funcRetorno : FUNC nombreFuncion LPAREN  RPAREN LPAREN datoReturn  RPAREN LCBRACKET instrucciones  returnF RCBRACKET'
+
+def p_funcionCompleta(p):
+  'funcCompleta : FUNC nombreFuncion LPAREN parametrosF RPAREN LPAREN datoReturn  RPAREN LCBRACKET instrucciones  returnF RCBRACKET'
+
 def p_nombreFuncion(p):
   'nombreFuncion : VARIABLE'
 
 def p_parametrosfuncion(p):
   '''parametrosF : VARIABLE TDATA
                 | VARIABLE TDATA COMMA parametrosF'''
-
-
-
+def p_datoReturn(p):
+  '''datoReturn : TDATA
+                  | TDATA COMMA TDATA'''
+def p_return(p):
+  '''returnF : RETURN dato
+              | RETURN elementArray '''
 
 #----------------------------SAM - MAPA (ESTRUCTURA DE DATOS) -----------------------
 def p_mapa(p):

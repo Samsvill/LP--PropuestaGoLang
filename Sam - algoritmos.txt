@@ -2,4 +2,8 @@
 Print("Hola")
 Println(5)
 
-#For
+#mapa
+nameAgeMap = map[string]int{
+		"James": 50,
+		"Ali":   39,
+	}

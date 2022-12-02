@@ -16,11 +16,13 @@ def p_instrucciones(p): #REGLA PADRE !!!
                       | concatDatos
                       | ArraySemantica
                       | switchh
+                      | asignaciones 
                       '''
 
 #---------------------------IMPRESION DE DATOS----------------------------------------
 def p_impresion(p):
-  'impresion : PRINT LPAREN dato RPAREN'
+  '''impresion : PRINT LPAREN dato RPAREN
+  | PRINTLN LPAREN dato RPAREN'''
 
 def p_dato(p):
   '''dato : INT 
@@ -56,8 +58,8 @@ def p_signoscomparacion(p):
 #--------------ARRAY - YANA (ESTRUCTURA DE DATOS) -------------
 
 def p_array(p):
-  '''array : VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATO LCBRACKET elementArray RCBRACKET
-            | VARIABLE FASTDEC LBRACKET INT TDATO LCBRACKET elementArray RCBRACKET'''
+  '''array : VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATA LCBRACKET elementArray RCBRACKET
+            | VARIABLE FASTDEC LBRACKET INT TDATA LCBRACKET elementArray RCBRACKET'''
 
 def p_elementArray(p) :
   '''elementArray : dato
@@ -82,10 +84,10 @@ def p_parametrosfuncion(p):
 
 #----------------------------SAM - MAPA (ESTRUCTURA DE DATOS) -----------------------
 def p_mapa(p):
-  '''mapa : VARIABLE EQUALS MAP LBRACKET TDATO RBRACKET TDATO LCBRACKET adentro RCBRACKET
+  '''mapa : VARIABLE EQUALS MAP LBRACKET TDATA RBRACKET TDATA LCBRACKET adentro RCBRACKET
   '''
 def p_dataTokensAvailable(p):
-  '''TDATO : TSTRING 
+  '''TDATA : TSTRING 
   | TINT
   | TFLOAT
   '''
@@ -104,6 +106,19 @@ def p_if(p):
 def p_bloquecomparacion(p):
   "comparacion : dato sigcomparacion dato"
 #------------------------- FIN - IF - SAM ---------------------------
+
+#--------------------- DECLARACION DE VARIABLES (SAM) ---------------
+def p_asignaciones(p):
+  '''asignaciones : varsimple
+  | varobviado
+  | decfast'''
+def p_simplevar(p):
+  '''varsimple : VAR VARIABLE TDATA EQUALS dato'''
+def p_varobviado(p):
+  '''varobviado : VAR VARIABLE EQUALS dato'''
+def p_decfast(p):
+  '''decfast : VARIABLE FASTDEC dato'''
+
 #------------------------REGLAS SEMANTICAS--------------------------
 #--------------------------- YANALEEN ------------------------------
 #El operador + no puede usarse entre dos tipos de datos diferentes

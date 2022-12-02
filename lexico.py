@@ -52,7 +52,6 @@ tokens = [
   'PUNTO_COMA',
   'LCBRACKET',
   'RCBRACKET',
-  'INCREMENT',
   'LBRACKET',
   'RBRACKET',
   'DQMARK',
@@ -134,24 +133,24 @@ def getTokens(lexer):
 
 # PROBAR -------SAM----------------
 Sam_instruc = """
-nameAgeMap = map[string]int{
+nameAgeMap = map[String]int{
 "James" : 50,
 "Ali" :   39,
 }
 """
 
 #Agregar mi algoritmo que pruebe todos los tokens
-#lexer.input(Sam_instruc)
-#getTokens(lexer)
-#
-## FIN PROBAR -------SAM----------------
-#
-## SEGUIR LEYENDO
-#linea=" "
-#while linea!="":
-#    linea=input(">>")
-#    lexer.input(linea)
-#    getTokens(lexer)
-## Tokenize
-#print("Succesfull")
+lexer.input(Sam_instruc)
+getTokens(lexer)
+
+# FIN PROBAR -------SAM----------------
+
+# SEGUIR LEYENDO
+linea=" "
+while linea!="":
+    linea=input(">>")
+    lexer.input(linea)
+    getTokens(lexer)
+# Tokenize
+print("Succesfull")
 

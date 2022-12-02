@@ -1,0 +1,5 @@
+#impresion SOLO PERMITE Print y Println con int, strings, floats y nombres de variables
+Print("Hola")
+Println(5)
+
+#For

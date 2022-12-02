@@ -31,9 +31,7 @@ def p_dato(p):
   | FLOAT
   | VARIABLE'''
 
-#--------------------------------- EXPRESIONES DE CONDICIONES -----------------------------
-def p_expresionCondiciones(p):
-  '''expresionCondicion : dato sigcomparacion dato '''
+
 
 #-------------------------- YANA - FOR (ESTRUCTURA DE CONTROL) ------------------------
 
@@ -56,8 +54,8 @@ def p_signoscomparacion(p):
                      | DIFERENTE
                      | COMPARA_IGUAL
                      | MAYORIGUAL
-                     | MENOR IGUAL
-                     | DIFERENTE'''
+                     | MENORIGUAL
+                     '''
 
 
 
@@ -146,7 +144,10 @@ def p_ElementstringA(p):
 def p_ElementIntA(p):
   '''elementIntS : INT
                    | INT COMMA elementIntS '''
-
+#-------------------------------- SAM ---------------------------------------
+#--------------------------------- EXPRESIONES DE CONDICIONES -----------------------------
+def p_expresionCondiciones(p):
+  '''expresionCondicion : VARIABLE FASTDEC comparacion'''
 
 #-------------------------- SWITCH (ESTRUCTURA DE CONTROL) ------------------------
 

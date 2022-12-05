@@ -1,9 +1,14 @@
 import ply.yacc as sintactico
 import time 
 from lexico import tokens
+from tkinter import *
 
-
-
+root = Tk()
+caja_resultados= Text(root)
+caja_resultados.config(bd=0, padx=6, pady=4,font=("JetBrains Mono",12) ,
+             insertbackground='white',spacing1='4',highlightthickness=2,
+             insertborderwidth=10, background='black', fg='white',highlightbackground='#AEACAC',highlightcolor='#FFFFFF')
+caja_resultados.grid(row=1, column=4,padx=10,sticky="w", columnspan=2)
 def p_instrucciones(p): #REGLA PADRE !!!
   '''instrucciones : impresion
                       | for
@@ -183,6 +188,7 @@ def p_def(p):
 def p_error(p):
   if p:
     print(f"Error de sintaxis - Token: {p.type}, Línea: {p.lineno}, Col: {p.lexpos}")
+    caja_resultados.insert('1.0', f"Error de sintaxis - Token: {p.type}, Línea: {p.lineno}, Col: {p.lexpos}\n")
     parser.errok()
   else:
     print("Error de sintaxis Fin de Linea")

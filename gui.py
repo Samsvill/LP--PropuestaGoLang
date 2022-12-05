@@ -1,5 +1,5 @@
 
-from tkinter import *
+
 from sintactico import *
 from lexico import *
 
@@ -22,10 +22,10 @@ def mostrarDatosLex():
 
 def mostrarDatosSintac():
     contenido= caja_codigo.get(1.0, 'end-1c')
-    result = parser.parse(contenido)
     caja_resultados.delete('1.0','end')
+    result = parser.parse(contenido)
     result= str(result)
-    caja_resultados.insert('1.0', result)
+    #caja_resultados.insert('1.0', result)
 
 
 
@@ -34,7 +34,7 @@ def borrarDatos():
     caja_resultados.delete("1.0", "end")
 
 # Configuración de la raíz
-root = Tk()
+
 root.title("Mi editor")
 root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=1)
@@ -72,11 +72,7 @@ caja_codigo.grid(row=1, column=0, columnspan=3,padx=10,sticky="n")
 
 
 #------------------------------Resultados------------------------------------#
-caja_resultados= Text(root)
-caja_resultados.config(bd=0, padx=6, pady=4,font=("JetBrains Mono",12) ,
-             insertbackground='white',spacing1='4',highlightthickness=2,
-             insertborderwidth=10, background='black', fg='white',highlightbackground='#AEACAC',highlightcolor='#FFFFFF')
-caja_resultados.grid(row=1, column=4,padx=10,sticky="w", columnspan=2)
+
 #-----------------------------------------------------------------------------------#
 
 
@@ -101,5 +97,4 @@ integrantes_label=Label(root, text='Integrantes:  ○ Samantha Sanchez  ○ Yana
 integrantes_label.grid(row=2, column=4)
 
 root.configure(bg='black')
-
 root.mainloop()

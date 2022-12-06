@@ -181,7 +181,7 @@ def p_cases(p):
 def p_case(p):
   '''case1 : CASE INT COLON instrucciones'''
 def p_def(p):
-  '''def : DEFAULT COMMA instrucciones'''
+  '''def : DEFAULT COLON instrucciones'''
 #-------------------------- FIN SWITCH (ESTRUCTURA DE CONTROL) ----------------------
 
  # ERRORES DE SINTAXIS

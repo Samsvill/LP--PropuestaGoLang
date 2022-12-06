@@ -7,3 +7,18 @@ nameAgeMap = map[string]int{
 		"James": 50,
 		"Ali":   39,
 	}
+#if
+if 5<5{Print("hola")}
+
+#var simple
+var hola int = 5
+#var obviado
+var hola = 5
+#declaracion rapida
+hola := 5
+
+#switch
+
+switch variables { case 0 : Print("hola")
+case 1 : Print("caso 2")
+default : Print("hola")}

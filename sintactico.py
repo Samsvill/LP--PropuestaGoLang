@@ -9,6 +9,12 @@ caja_resultados.config(bd=0, padx=6, pady=4,font=("JetBrains Mono",12) ,
              insertbackground='white',spacing1='4',highlightthickness=2,
              insertborderwidth=10, background='black', fg='white',highlightbackground='#AEACAC',highlightcolor='#FFFFFF')
 caja_resultados.grid(row=1, column=4,padx=10,sticky="w", columnspan=2)
+
+def p_bloqueinstrucciones(p):
+  '''bloqueI : instrucciones
+              | instrucciones bloqueI '''
+
+
 def p_instrucciones(p): #REGLA PADRE !!!
   '''instrucciones : impresion
                       | for
@@ -42,17 +48,19 @@ def p_dato(p):
 
 #for con ciclo comun
 def p_for(p):
-  'for : FOR VARIABLE FASTDEC  INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA VARIABLE MASMAS LCBRACKET '
+  'for : FOR VARIABLE FASTDEC  INT PUNTO_COMA VARIABLE sigcomparacion  INT PUNTO_COMA VARIABLE incremento LCBRACKET  bloqueI  RCBRACKET'
 
 #for estilo while
 def p_for2(p):
-  'for2 : FOR VARIABLE sigcomparacion INT LCBRACKET'
+  'for2 : FOR comparacionF LCBRACKET  bloqueI  RCBRACKET'
 
 #for infinito
 def p_for3(p):
-  'for3 : FOR LCBRACKET instrucciones RCBRACKET'
+  'for3 : FOR LCBRACKET bloqueI  RCBRACKET'
 
-
+def p_incremento(p):
+  '''incremento : MASMAS
+                | MENOSMENOS'''
 def p_signoscomparacion(p):
   '''sigcomparacion : MENORQUE
                      | MAYORQUE
@@ -62,7 +70,8 @@ def p_signoscomparacion(p):
                      | MENORIGUAL
                      '''
 
-
+def p_comparacion(p):
+  'comparacionF : dato sigcomparacion dato'
 
 #----------------------------FIN FOR---------------------------
 
@@ -70,7 +79,7 @@ def p_signoscomparacion(p):
 
 def p_array(p):
   '''array : VAR VARIABLE EQUALS LBRACKET INT RBRACKET TDATA LCBRACKET elementArray RCBRACKET
-            | VARIABLE FASTDEC LBRACKET INT TDATA LCBRACKET elementArray RCBRACKET'''
+            | VARIABLE FASTDEC LBRACKET INT RBRACKET  TDATA LCBRACKET elementArray RCBRACKET'''
 
 def p_elementArray(p) :
   '''elementArray : dato
@@ -86,16 +95,16 @@ def p_funciones(p):
               | funcRetorno
               | funcCompleta '''
 def p_funcionSimple(p):
-  'funSimple : FUNC nombreFuncion LPAREN RPAREN LCBRACKET instrucciones RCBRACKET'
+  'funSimple : FUNC nombreFuncion LPAREN RPAREN LCBRACKET bloqueI RCBRACKET'
 
 def p_funcionParametros(p):
-  'funcPa : FUNC nombreFuncion LPAREN parametrosF RPAREN LCBRACKET instrucciones RCBRACKET'
+  'funcPa : FUNC nombreFuncion LPAREN parametrosF RPAREN LCBRACKET bloqueI RCBRACKET'
 
 def p_funcRetorno(p):
-  'funcRetorno : FUNC nombreFuncion LPAREN  RPAREN LPAREN datoReturn  RPAREN LCBRACKET instrucciones  returnF RCBRACKET'
+  'funcRetorno : FUNC nombreFuncion LPAREN  RPAREN LPAREN datoReturn  RPAREN LCBRACKET bloqueI  returnF RCBRACKET'
 
 def p_funcionCompleta(p):
-  'funcCompleta : FUNC nombreFuncion LPAREN parametrosF RPAREN LPAREN datoReturn  RPAREN LCBRACKET instrucciones  returnF RCBRACKET'
+  'funcCompleta : FUNC nombreFuncion LPAREN parametrosF RPAREN LPAREN datoReturn  RPAREN LCBRACKET bloqueI  returnF RCBRACKET'
 
 def p_nombreFuncion(p):
   'nombreFuncion : VARIABLE'

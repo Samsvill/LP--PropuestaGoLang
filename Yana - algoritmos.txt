@@ -1,0 +1,32 @@
+func main(){
+    for{
+	for i:=0 ; i <3 ; i++ {
+		Print(85)
+		var array1 = [4] int {1,2,3}
+		array2 := [5] String {"Hola","Como","Papa","abuela","camilaS"}
+
+	}
+
+   }
+}
+func add(i int, j int) (int) {
+	var hola int = 5
+	var hola2 int = 6
+	return hola , hola2
+}
+
+func funcion2(i int, j int)  {
+	for {
+		var array3 = [4] String {"Hola","camila","maria"}
+		array := [5] int {10,41,45,41,52}
+	}
+}
+
+func funcion3()(String){
+	for i<5 {
+		switch variables { case 0 : Print("hola")
+		case 1 : Print("caso 2")
+		default : Print("hola")}
+		
+	}return 1
+}
